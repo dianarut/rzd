@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="teamSuite">
+    <test name="buyingTicketFromMainPage">
+        <classes>
+            <class name="LoginFromMainPage"/>
+            <class name="BuyingTicketFromMainPage"/>
+        </classes>
+    </test>
+</suite>
