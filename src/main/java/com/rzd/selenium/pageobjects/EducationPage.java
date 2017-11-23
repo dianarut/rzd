@@ -24,17 +24,20 @@ public class EducationPage extends AbstractPage{
     @FindBy(xpath = ".//select[@name='city_id']")
     private WebElement city;
 
+    private static final String EDUCATION_NAME = ConfigurationManager.getProperty("education.name");
+    private static final String EDUCATION_SPECIALIZATION = ConfigurationManager.getProperty("education.specialization");
+    private static final String EDUCATION_CITY = ConfigurationManager.getProperty("education.city");
+
     public int pressButton(){
         searchButton.click();
-
         return list.size();
     }
 
     public void fillForm(){
-        name.sendKeys(ConfigurationManager.getProperty("education.name"));
+        name.sendKeys(EDUCATION_NAME);
         Select dropdownSpec = new Select(specialization);
-        dropdownSpec.selectByVisibleText(ConfigurationManager.getProperty("education.specialization"));
+        dropdownSpec.selectByVisibleText(EDUCATION_SPECIALIZATION);
         Select dropdownCity = new Select(city);
-        dropdownCity.selectByVisibleText(ConfigurationManager.getProperty("education.city"));
+        dropdownCity.selectByVisibleText(EDUCATION_CITY);
     }
 }
