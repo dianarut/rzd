@@ -4,8 +4,8 @@ import com.rzd.selenium.pageobjects.MainPage;
 import com.rzd.selenium.pageobjects.MainPageEng;
 import com.rzd.selenium.pageobjects.PassengerMainPageEng;
 import com.rzd.selenium.util.ConfigurationManager;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -13,6 +13,8 @@ import org.testng.asserts.SoftAssert;
 
 
 public class EngVersion {
+
+    private WebDriver driver = BrowserFactory.getInstance().getDriver();
 
     private MainPage mainPage;
     private MainPageEng mainPageEng;
@@ -25,7 +27,7 @@ public class EngVersion {
 
     @BeforeClass
     public void goToMainPage() {
-        BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
+        driver.get(ConfigurationManager.getProperty("driver.start"));
     }
 
     @BeforeTest
@@ -39,7 +41,7 @@ public class EngVersion {
     @Test
     public void goToEngMainPage() {
         String expectedURL = mainPageURL;
-        String actualURL = BrowserFactory.getInstance().getDriver().getCurrentUrl();
+        String actualURL = driver.getCurrentUrl();
         Assert.assertEquals(actualURL, expectedURL);
         mainPage.goToEngVersion();
     }
@@ -47,7 +49,7 @@ public class EngVersion {
     @Test(dependsOnMethods = "goToEngMainPage")
     public void goToMainPassPage() {
         String expectedURL = mainPageEngURL;
-        String actualURL = BrowserFactory.getInstance().getDriver().getCurrentUrl();
+        String actualURL = driver.getCurrentUrl();
         Assert.assertEquals(actualURL, expectedURL);
         mainPageEng.goToPassengerMainPage();
     }
@@ -55,7 +57,7 @@ public class EngVersion {
     @Test(dependsOnMethods = "goToMainPassPage")
     public void goToSuburbanTrainTab() {
         String expectedTitle = passengerMainEngTitle;
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
+        String actualTitle = driver.getTitle();
         passengerMainPageEng.goToSuburbanTrainTab();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertFalse(actualTitle.equals(expectedTitle), "Test should fail, suburban trains tab is not working");

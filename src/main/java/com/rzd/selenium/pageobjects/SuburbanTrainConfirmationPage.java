@@ -29,8 +29,7 @@ public class SuburbanTrainConfirmationPage extends AbstractPage {
     }
 
     public String pageh1Text() {
-        String h1 = pageh1Text.getText();
-        return h1;
+        return pageh1Text.getText();
     }
 
 

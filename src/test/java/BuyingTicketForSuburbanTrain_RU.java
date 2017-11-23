@@ -4,6 +4,7 @@ import com.rzd.selenium.pageobjects.PassengerMainPage;
 import com.rzd.selenium.pageobjects.SuburbanTrainConfirmationPage;
 import com.rzd.selenium.pageobjects.SuburbanTrainMainPage;
 import com.rzd.selenium.util.ConfigurationManager;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 
 public class BuyingTicketForSuburbanTrain_RU {
 
+    private WebDriver driver = BrowserFactory.getInstance().getDriver();
 
     private MainPage mainPage;
     private PassengerMainPage passengerMainPage;
@@ -28,7 +30,7 @@ public class BuyingTicketForSuburbanTrain_RU {
 
     @BeforeTest
     public void goToMainPage() {
-        BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
+        driver.get(ConfigurationManager.getProperty("driver.start"));
     }
 
 
@@ -43,7 +45,7 @@ public class BuyingTicketForSuburbanTrain_RU {
     @Test
     public void goToPassengersTab() {
         String expectedTitle = mainPageURL;
-        String actualTitle = BrowserFactory.getInstance().getDriver().getCurrentUrl();
+        String actualTitle = driver.getCurrentUrl();
         Assert.assertEquals(actualTitle, expectedTitle);
         mainPage.clickPassengersButton();
     }
@@ -51,7 +53,7 @@ public class BuyingTicketForSuburbanTrain_RU {
     @Test(description = "Going to suburban trains page", dependsOnMethods = "goToPassengersTab")
     public void clickOnSuburbanTrainsTab() {
         String expectedTitle = passengerMainPageTitle;
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
+        String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
         passengerMainPage.clickOnSuburbanTrainsTab();
     }
@@ -59,7 +61,7 @@ public class BuyingTicketForSuburbanTrain_RU {
     @Test(description = "Filling all fields with correct data", dependsOnMethods = "clickOnSuburbanTrainsTab")
     public void inputCorrectData() {
         String expectedTitle = suburbanTrainMainPageTitle;
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
+        String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
         suburbanTrainMainPage.fillAllFields(surname, initials, passportNumber);
     }
