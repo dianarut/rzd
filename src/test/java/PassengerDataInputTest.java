@@ -17,7 +17,7 @@ public class PassengerDataInputTest {
        personalDataPage.chooseDocType();
        personalDataPage.inputDocNumber("123546789");
        personalDataPage.chooseCountry();
-       personalDataPage.uncheckInsurance();
+      // personalDataPage.uncheckInsurance();
        personalDataPage.chooseSeat();
 
    }

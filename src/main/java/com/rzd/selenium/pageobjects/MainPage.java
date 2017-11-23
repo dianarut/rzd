@@ -1,14 +1,11 @@
 package com.rzd.selenium.pageobjects;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import static com.rzd.selenium.util.TimeUtil.getCalendar;
+import static com.rzd.selenium.util.TimeUtil.generateDate;
 
 public class MainPage extends AbstractPage {
 
@@ -62,6 +59,9 @@ public class MainPage extends AbstractPage {
 
     @FindBy(xpath = "//img[@class=\"mlang_icon\"]")
     private WebElement englishFlagButton;
+
+    @FindBy(xpath = ".//*[@class='greyBlock'][child:: *[@id='ticketbuyforma_horizontal']]")
+    private WebElement passengersForm;
 
     public MainPageEng goToEngVersion() {
         englishFlagButton.click();
@@ -120,9 +120,8 @@ public class MainPage extends AbstractPage {
         return this;
     }
 
+    //This click is designed to hide drop-down list.
     public MainPage justClick() {
-        justForClick.click();
-        justForClick.click();
         justForClick.click();
         return this;
     }
@@ -149,17 +148,17 @@ public class MainPage extends AbstractPage {
         return this;
     }
 
-    public String generateDate(int plusDaysToCurrentDate) {
-        Calendar cal = getCalendar();
-        cal.add(Calendar.DATE, plusDaysToCurrentDate);
-        Date dateNow = cal.getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("d.MM.yyyy");
-        String date = dateFormat.format(dateNow);
-        return date;
-    }
-
     public ActivityPage openActivityPage(){
         workResults.click();
         return new ActivityPage();
+    }
+
+    public boolean checkPassengersFrom(){
+        try {
+            super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersForm));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 }

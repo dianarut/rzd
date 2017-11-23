@@ -1,10 +1,9 @@
 package com.rzd.selenium.pageobjects;
 
-import com.rzd.selenium.factory.BrowserFactory;
 import com.rzd.selenium.util.ConfigurationManager;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class PersonalDataPage extends AbstractPage {
     private String sex = ConfigurationManager.getProperty("passport.gender");
     private String bDay = ConfigurationManager.getProperty("passport.birthday");
     private String passNumber = ConfigurationManager.getProperty("passport.number");
-
+    private final boolean check = false;
 
     @FindBy (xpath = "//input[@name = \"lastName\"]")
     private WebElement surname;
@@ -76,17 +75,23 @@ public class PersonalDataPage extends AbstractPage {
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo'][preceding:: *[@class='col-xs-24 t-dblvert-pad j-scheme-box']]")
     private WebElement seatsFrom;
 
+    @FindBy(xpath = ".//*[@class='rn-array'][count(.//*[child:: *[@id='Layer_1']])=2]")
+    private WebElement seatsForms;
+
 
     public PersonalDataPage inputSurname(String lastname){
+        surname.clear();
         surname.sendKeys(lastname);
         return this;
     }
     public PersonalDataPage inputName(String firstName){
+        name.clear();
         name.sendKeys(firstName);
         return this;
     }
 
     public  PersonalDataPage inputMidName(String fathername){
+        midname.clear();
         midname.sendKeys(fathername);
         return this;
     }
@@ -110,6 +115,7 @@ public class PersonalDataPage extends AbstractPage {
     }
 
     public PersonalDataPage inputDocNumber(String number){
+        docNumber.clear();
         docNumber.sendKeys(number);
         return this;
     }
@@ -120,8 +126,10 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage uncheckInsurance(){
-        insurance.click();
+    public PersonalDataPage uncheckInsurance(boolean check){
+        if (!check && insurance.isSelected()) {
+            insurance.click();
+        }
         return this;
     }
 
@@ -150,7 +158,7 @@ public class PersonalDataPage extends AbstractPage {
         personalDataPage.chooseDocType();
         personalDataPage.inputDocNumber(passNumber);
         personalDataPage.chooseCountry();
-        personalDataPage.uncheckInsurance();        
+        personalDataPage.uncheckInsurance(check);
         return this;
     }
 
@@ -163,5 +171,12 @@ public class PersonalDataPage extends AbstractPage {
         seatsFrom.click();
         return this;
     }
-
+    public boolean checkSeatsLayout(){
+        try {
+            seatsForms.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 }

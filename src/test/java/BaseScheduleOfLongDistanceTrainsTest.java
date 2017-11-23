@@ -2,6 +2,7 @@ import com.rzd.selenium.factory.BrowserFactory;
 import com.rzd.selenium.util.ConfigurationManager;
 import org.testng.Assert;
 import com.rzd.selenium.pageobjects.*;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -11,17 +12,15 @@ public class BaseScheduleOfLongDistanceTrainsTest{
     private String loginPageTitle = ConfigurationManager.getProperty("page.login.title");
     private String passengerMainTitle = ConfigurationManager.getProperty("page.passengerMain.title");
 
-    @BeforeTest
-    public void goToMainPage() {
+    @BeforeClass
+    public void init2() {
         BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
     }
 
     @Test
     public void baseScheduleLDTrainsTest_MainPage() {
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
-        String expectedTitle = loginPageTitle;
-        Assert.assertEquals(actualTitle, expectedTitle);
         MainPage mainPage = new MainPage();
+        Assert.assertTrue(mainPage.checkPassengersFrom(), "There are no passengers form!");
         mainPage.clickPassengersButton();
     }
 
