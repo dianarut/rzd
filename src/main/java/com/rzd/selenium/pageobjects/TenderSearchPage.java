@@ -3,15 +3,14 @@ package com.rzd.selenium.pageobjects;
 import com.rzd.selenium.util.TimeUtil;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class TenderSearchPage extends AbstractPage {
+
+    private String today = TimeUtil.getCurrentCalendar();
 
     @FindBy(xpath = "//select[@name=\"property_type_id\"]")
     private WebElement objectType;
@@ -34,11 +33,14 @@ public class TenderSearchPage extends AbstractPage {
     @FindBy(xpath = "//a[@class=\"ui-state-default\"]")
     private WebElement currentDay;
 
-    public String getCurrentDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        String date = dateFormat.format(TimeUtil.getCalendar().getTime());
-        return date;
-    }
+    @FindBy(xpath="//tr/td[text()='товары']")
+    private List<WebElement> goods;
+
+    @FindBy(xpath = "//tr/td[text()='Москва']")
+    private List<WebElement> cities;
+
+    @FindBy(xpath = "//*[@id=\"container\"]//table[@class=\"table\"]/tbody/tr/td[2]")
+    private List<WebElement> resultList;
 
 
     public TenderSearchPage fillTheSearch() {
@@ -46,40 +48,29 @@ public class TenderSearchPage extends AbstractPage {
         selectObjectType.selectByVisibleText("товары");
         Select selectCity = new Select(place);
         selectCity.selectByVisibleText("Москва");
-        fromDate.sendKeys(getCurrentDate());
-        toDate.sendKeys(getCurrentDate());
+        fromDate.sendKeys(today);
+        toDate.sendKeys(today);
         return this;
     }
-
 
     public TenderSearchPage search() {
         searchButton.click();
         return this;
     }
 
-
-    @FindBy(xpath="//tr/td[text()='товары']")
-    private List<WebElement> goods;
-
     public int goodsAmount(){
-       return goods.size();
+        return goods.size();
     }
-
-    @FindBy(xpath = "//tr/td[text()='Москва']")
-    private List<WebElement> cities;
 
     public int citiesAmount(){
         return cities.size();
     }
 
-    @FindBy(xpath = "//*[@id=\"container\"]//table[@class=\"table\"]/tbody/tr/td[2]")
-    private List<WebElement> resultList;
-
-    boolean res;
 
     public boolean containsCorrectDate(){
+        boolean res = false;
         for (WebElement n: resultList) {
-            if(n.getText().contains(getCurrentDate()))
+            if(n.getText().contains(today))
              res = true;
         }
         return res;
