@@ -1,11 +1,11 @@
-import com.rzd.selenium.factory.BrowserFactory;
+
 import com.rzd.selenium.pageobjects.MainPage;
 import com.rzd.selenium.pageobjects.TenderPage;
 import com.rzd.selenium.pageobjects.TenderPlannedPurchasesPage;
 import com.rzd.selenium.pageobjects.TenderSearchPage;
 import com.rzd.selenium.util.ConfigurationManager;
+import com.rzd.selenium.util.Downloader;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
 
@@ -19,8 +19,8 @@ public class TenderTest {
         TenderPage tenderPage = mainPage.openTenderPage();
         TenderPlannedPurchasesPage tenderPlannedPurchasesPage = tenderPage.openPlannedpurchasePage();
         tenderPlannedPurchasesPage.downloadPurshasingPlan();
-        String fileName = tenderPlannedPurchasesPage.docName();
-        Assert.assertTrue(tenderPlannedPurchasesPage.isFileDownloaded(downloadPath, fileName));
+        String filename = tenderPlannedPurchasesPage.docName();
+        Assert.assertTrue(Downloader.isFileDownloaded(downloadPath, filename));
 
     }
 

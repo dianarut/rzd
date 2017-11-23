@@ -1,6 +1,5 @@
 package com.rzd.selenium.pageobjects;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,10 +10,9 @@ public class ForInvestorsPage extends AbstractPage {
     @FindBy(xpath = "//title[text()='Инвесторам']")
     private List<WebElement> investoramPageTitle;
 
-    public int isForInvestorsPage(){
+    public int isForInvestorsPage() {
         return investoramPageTitle.size();
     }
-
 
 
 }
