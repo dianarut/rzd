@@ -10,7 +10,7 @@ public class GamesPage extends AbstractPage {
     @FindBy(xpath = "//*[contains(text(),'Олимпийские игры')]")
     private List<WebElement> gamesPageTitle;
 
-    public int isGamesPage () {
+    public int isGamesPage() {
         return gamesPageTitle.size();
     }
 }

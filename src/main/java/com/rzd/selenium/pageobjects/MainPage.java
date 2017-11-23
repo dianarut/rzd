@@ -54,7 +54,7 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = "//a[@href='http://social.rzd.ru/']")
     private WebElement vacancyLink;
 
-    @FindBy(xpath = "//*[@href='http://pass.rzd.ru/' and text()='Пассажирам']")
+    @FindBy(xpath = "//a[@href=\"http://pass.rzd.ru/\"]")
     private WebElement passengersButton;
 
     @FindBy(xpath = "//*[contains(text(), 'Итоги')]")
