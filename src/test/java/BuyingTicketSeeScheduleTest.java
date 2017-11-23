@@ -13,7 +13,7 @@ public class BuyingTicketSeeScheduleTest{
     private String passengerMainTitle = ConfigurationManager.getProperty("page.passengerMain.title");
     private int plusDaysToCurrentDate = Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
 
-
+//123
     @BeforeTest
     public void goToMainPage() {
         BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
