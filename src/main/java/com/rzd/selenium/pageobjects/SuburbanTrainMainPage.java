@@ -3,26 +3,25 @@ package com.rzd.selenium.pageobjects;
 import com.rzd.selenium.factory.BrowserFactory;
 import com.rzd.selenium.util.TimeUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import java.util.Calendar;
 
 public class SuburbanTrainMainPage extends AbstractPage {
 
-
-    private int todaysDate;
-    private int todaysMonth;
-    private int todaysYear;
-    private String date;
-
+    private WebDriver driver = BrowserFactory.getInstance().getDriver();
+    private int day = TimeUtil.getCalendar().get(Calendar.DATE) + 1;
+    private int month = TimeUtil.getCalendar().get(Calendar.MONTH) + 1;
+    private int year = TimeUtil.getCalendar().get(Calendar.YEAR);
+    private String date = day + "." + month + "." + year;
 
     @FindBy(xpath = "(//option[@value=\"2000002\"])[1]")
     private WebElement departureStationFromDropdown;
 
     @FindBy(xpath = "(//option[@value=\"2000015\"])[2]")
     private WebElement arrivalStationFromDropdown;
-
 
     @FindBy(xpath = "(//select[@class=\"jroute-field j-single box-form__input\"])[1]")
     private WebElement directionDropdown;
@@ -49,11 +48,9 @@ public class SuburbanTrainMainPage extends AbstractPage {
     private WebElement mainSubmitButton;
 
     //This method helps to pick date dynamically, depending on today's date.
-    public void datePicker() {
-        getTodaysDate();
-        BrowserFactory.getInstance().getDriver().findElement(By.xpath(" (//a[@href=\"#" + date + "\"])[1]")).click();
+    private void datePicker() {
+        driver.findElement(By.xpath(" (//a[@href=\"#" + date + "\"])[1]")).click();
     }
-
 
     public void fillAllFields(String surname, String initials, String passportNumber) {
         pickDepartureStation();
@@ -115,15 +112,5 @@ public class SuburbanTrainMainPage extends AbstractPage {
         mainSubmitButton.click();
         return this;
     }
-
-
-    private String getTodaysDate() {
-        todaysDate = (TimeUtil.getCalendar().get(TimeUtil.getCalendar().DAY_OF_MONTH) + 1);
-        todaysMonth = (TimeUtil.getCalendar().get(TimeUtil.getCalendar().MONTH) + 1);
-        todaysYear = (TimeUtil.getCalendar().get(TimeUtil.getCalendar().YEAR));
-        date = todaysDate + "." + todaysMonth + "." + todaysYear;
-        return date;
-    }
-
 
 }

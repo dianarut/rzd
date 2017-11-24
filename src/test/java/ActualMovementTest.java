@@ -3,6 +3,7 @@ import com.rzd.selenium.pageobjects.ActualMovementPage;
 import com.rzd.selenium.pageobjects.MainPage;
 import com.rzd.selenium.pageobjects.PassengerMainPage;
 import com.rzd.selenium.util.ConfigurationManager;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,10 +12,12 @@ import org.testng.asserts.SoftAssert;
 public class ActualMovementTest {
 
     private SoftAssert softAssert;
+    private static final String DRIVER_START = ConfigurationManager.getProperty("driver.start");
 
     @BeforeClass
     public void init() {
-        BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
+        WebDriver driver = BrowserFactory.getInstance().getDriver();
+        driver.get(DRIVER_START);
         softAssert = new SoftAssert();
     }
 
@@ -43,5 +46,4 @@ public class ActualMovementTest {
         softAssert.assertFalse(actualMovementPage.pressButton());
         softAssert.assertAll();
     }
-
 }

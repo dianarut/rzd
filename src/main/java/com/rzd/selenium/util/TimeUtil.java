@@ -10,7 +10,6 @@ public class TimeUtil {
 
     public static Calendar getCalendar() {
         Calendar calendar = Calendar.getInstance();
-
         return calendar;
     }
 //Заменить метод getCalendar на те что написаны снизу!!!
@@ -30,4 +29,3 @@ public class TimeUtil {
         return date;
     }
 }
-

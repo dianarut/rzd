@@ -11,63 +11,45 @@ import java.util.List;
 
 public class PersonalDataPage extends AbstractPage {
 
-    private String lastname = ConfigurationManager.getProperty("passport.surname");
-    private String firstname = ConfigurationManager.getProperty("passport.name");
-    private String fathername = ConfigurationManager.getProperty("passport.fathername");
-    private String sex = ConfigurationManager.getProperty("passport.gender");
-    private String bDay = ConfigurationManager.getProperty("passport.birthday");
-    private String passNumber = ConfigurationManager.getProperty("passport.number");
-    private final boolean check = false;
+    private static final String LAST_NAME = ConfigurationManager.getProperty("passport.surname");
+    private static final String FIRST_NAME = ConfigurationManager.getProperty("passport.name");
+    private static final String FATHER_NAME = ConfigurationManager.getProperty("passport.fathername");
+    private static final String SEX = ConfigurationManager.getProperty("passport.gender");
+    private static final String B_DAY = ConfigurationManager.getProperty("passport.birthday");
+    private static final String PASS_NUMBER = ConfigurationManager.getProperty("passport.number");
 
-    @FindBy (xpath = "//input[@name = \"lastName\"]")
+    @FindBy(xpath = "//input[@name = \"lastName\"]")
     private WebElement surname;
-
 
     @FindBy(xpath = "//input[@name = \"firstName\"]")
     private WebElement name;
 
-
-    @FindBy(xpath  ="//input[@name = \"midName\"]")
+    @FindBy(xpath = "//input[@name = \"midName\"]")
     private WebElement midname;
-
 
     @FindBy(xpath = "//select[@name=\"gender\"]")
     private WebElement gender;
 
-
-
     @FindBy(name = "birthdate")
     private WebElement birthday;
-
-
 
     @FindBy(xpath = "//select[@name=\"docType\"]")
     private WebElement docType;
 
-
-
     @FindBy(xpath = "//input[@name=\"docNumber\"]")
     private WebElement docNumber;
-
-
 
     @FindBy(xpath = "//select[@name=\"country\"]")
     private WebElement country;
 
-
-
     @FindBy(xpath = "//input[@name=\"bInsurance\"]")
     private WebElement insurance;
-
-
 
     @FindBy(xpath = "//*[contains(@class, 's-cell s-type-up')]")
     private List<WebElement> seats;
 
-
     @FindBy(xpath = "//button[@type=\"submit\" and text()='Зарезервировать места']")
     private WebElement reserveButton;
-
 
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo']")
     private WebElement seatsTo;
@@ -102,13 +84,13 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage inputBirthday(String day){
+    public PersonalDataPage inputBirthday(String day) {
         birthday.clear();
         birthday.sendKeys(day);
         return this;
     }
 
-    public PersonalDataPage chooseDocType(){
+    public PersonalDataPage chooseDocType() {
         Select selectDoc = new Select(docType);
         selectDoc.selectByValue("4");
         return this;
@@ -120,7 +102,7 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage chooseCountry(){
+    public PersonalDataPage chooseCountry() {
         Select selectCountry = new Select(country);
         selectCountry.selectByValue("19");
         return this;
@@ -133,9 +115,9 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage chooseSeat(){
-       for(int i=0; i<=seats.size(); i++)
-            if(seats.get(i).isEnabled()){
+    public PersonalDataPage chooseSeat() {
+        for (int i = 0; i <= seats.size(); i++)
+            if (seats.get(i).isEnabled()) {
                 seats.get(i).click();
                 break;
             }
@@ -143,31 +125,31 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PayAgreementPage reserveTicket(){
+    public PayAgreementPage reserveTicket() {
         reserveButton.click();
         return new PayAgreementPage();
     }
 
-    public PersonalDataPage fillTheForm(){
+    public PersonalDataPage fillTheForm() {
         PersonalDataPage personalDataPage = new PersonalDataPage();
-        personalDataPage.inputSurname(lastname);
-        personalDataPage.inputName(firstname);
-        personalDataPage.inputMidName(fathername);
-        personalDataPage.chooseGender(sex);
-        personalDataPage.inputBirthday(bDay);
+        personalDataPage.inputSurname(LAST_NAME);
+        personalDataPage.inputName(FIRST_NAME);
+        personalDataPage.inputMidName(FATHER_NAME);
+        personalDataPage.chooseGender(SEX);
+        personalDataPage.inputBirthday(B_DAY);
         personalDataPage.chooseDocType();
-        personalDataPage.inputDocNumber(passNumber);
+        personalDataPage.inputDocNumber(PASS_NUMBER);
         personalDataPage.chooseCountry();
         personalDataPage.uncheckInsurance(check);
         return this;
     }
 
-    public PersonalDataPage chooseSeatTo(){
+    public PersonalDataPage chooseSeatTo() {
         seatsTo.click();
         return this;
     }
 
-    public PersonalDataPage chooseSeatFrom(){
+    public PersonalDataPage chooseSeatFrom() {
         seatsFrom.click();
         return this;
     }

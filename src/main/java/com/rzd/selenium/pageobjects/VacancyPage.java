@@ -19,7 +19,6 @@ public class VacancyPage extends AbstractPage{
     @FindBy(xpath = ".//input[@name='org_unit_name']")
     private WebElement department;
 
-
     @FindBy(xpath = ".//select[@name='region_id']")
     private WebElement region;
 
@@ -29,20 +28,22 @@ public class VacancyPage extends AbstractPage{
     @FindBy(xpath = ".//input[@class='padR10']")
     private WebElement formButton;
 
+    private static final String VACANCY_POSITION = ConfigurationManager.getProperty("vacancy.position");
+    private static final String VACANCY_REGION = ConfigurationManager.getProperty("vacancy.region");
+    private static final String VACANCY_SALARY = ConfigurationManager.getProperty("vacancy.salary");
+
     public boolean pressButton(){
         searchButton.click();
-
         return resultTable.isDisplayed();
     }
 
     public boolean fillForm(){
-        vacancy.sendKeys(ConfigurationManager.getProperty("vacancy.position"));
+        vacancy.sendKeys(VACANCY_POSITION);
         department.sendKeys("");
         Select select = new Select(region);
-        select.selectByVisibleText(ConfigurationManager.getProperty("vacancy.region"));
-        salary.sendKeys(ConfigurationManager.getProperty("vacancy.salary"));
+        select.selectByVisibleText(VACANCY_REGION);
+        salary.sendKeys(VACANCY_SALARY);
         formButton.click();
-
         return resultTable.isDisplayed();
     }
 }

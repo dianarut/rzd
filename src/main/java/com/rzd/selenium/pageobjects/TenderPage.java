@@ -14,8 +14,6 @@ public class TenderPage extends AbstractPage{
     @FindBy(xpath = "//img[@title = \"Планируемые закупки\"]")
     private WebElement plannedPurchase;
 
-
-
     public TenderPlannedPurchasesPage openPlannedpurchasePage(){
         plannedPurchase.click();
         return new TenderPlannedPurchasesPage();
@@ -24,9 +22,5 @@ public class TenderPage extends AbstractPage{
     public TenderSearchPage openTenderSearchPage(){
         searchButton.click();
         return new TenderSearchPage();
-    }
-    public TenderPurchasingAreaPage openPurchasingAreaPage(){
-        purchasingArea.click();
-        return new TenderPurchasingAreaPage();
     }
 }

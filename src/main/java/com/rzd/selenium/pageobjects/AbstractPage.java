@@ -1,9 +1,14 @@
 package com.rzd.selenium.pageobjects;
 
 import com.rzd.selenium.factory.BrowserFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
 
 public class AbstractPage {
 
@@ -19,9 +24,21 @@ public class AbstractPage {
         return waiter;
     }
 
+    protected void waitForElementEnabled(WebElement webElement, int seconds) {
+        new WebDriverWait(driver, seconds).until(ExpectedConditions.elementToBeClickable(webElement));
+    }
+
     public String getTitleFromDriver() {
         String title = driver.getTitle();
         return title;
+    }
+
+
+    public void tabSwitcher() {
+        ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(0));
+        driver.close();
+        driver.switchTo().window(tabs2.get(1));
     }
 
 }
