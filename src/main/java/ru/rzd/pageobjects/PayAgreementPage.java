@@ -18,16 +18,16 @@ public class PayAgreementPage extends AbstractPage {
     @FindBy(xpath = "//span[text()='Перейти к оплате']")
     private WebElement goToPaymentButton;
 
-    public PaymentPage goToPayment() {
+    public List<WebElement> getReservationMessage() {
+        return reservationMessage;
+    }
+
+    public PaymentPage goToPaymentPage() {
         goToPaymentButton.click();
         return new PaymentPage();
     }
 
-    public boolean isReservationMessage() {
-        return reservationMessage.size()>0;
-    }
-
-    public PayAgreementPage agreeWithTerms() {
+    public PayAgreementPage checkAgreeWithTermsBox() {
         super.waitForElementEnabled(agreeButton, 2);
         agreeButton.click();
         return this;

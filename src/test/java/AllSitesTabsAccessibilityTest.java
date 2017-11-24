@@ -1,5 +1,7 @@
+import org.testng.annotations.AfterClass;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.*;
+import ru.rzd.util.AssertManager;
 import ru.rzd.util.ConfigurationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +23,7 @@ public class AllSitesTabsAccessibilityTest {
         mainPage = new MainPage();
         AllSitesPage allSitesPage = mainPage.openAllSitesPage();
         ForInvestorsPage forInvestorsPage = allSitesPage.openInvestoramPage();
-        Assert.assertTrue(forInvestorsPage.isForInvestorsPage()>0 );
+        Assert.assertTrue(AssertManager.isElementPresent(forInvestorsPage.getInvestoramPageAtribute()));
     }
 
     @Test //тест будет падать, тк ссылка на страницу не работает. так было задумано
@@ -29,18 +31,22 @@ public class AllSitesTabsAccessibilityTest {
         mainPage = new MainPage();
         AllSitesPage allSitesPage = mainPage.openAllSitesPage();
         RestAndTreatmentPage restAndTreatmentPage = allSitesPage.openRestAndTreatmentPage();
-        Assert.assertTrue(restAndTreatmentPage.isRestAndTreatmentPage() > 0, "Rest and Treatment failed");
+        Assert.assertTrue(AssertManager.isElementPresent(restAndTreatmentPage.getRestAndtreatmentPageAtribute()), "Rest and Treatment page failed");
     }
 
     @Test //тест будет падать, тк ссылка на страницу не работает. так было задумано
     public void gamesAccessibility(){
         mainPage = new MainPage();
         ActivityPage activityPage = mainPage.openActivityPage();
-        activityPage.click2011();
-        GamesPage gamesPage = activityPage.clickTheLink();
-        Assert.assertTrue(gamesPage.isGamesPage()>0);
+        activityPage.clickLinkTo2011report();
+        GamesPage gamesPage = activityPage.clickLinklinkToGamesPage();
+        Assert.assertTrue(AssertManager.isElementPresent(gamesPage.getGamesPageAtribute()), "Games page failed");
     }
 
+    @AfterClass
+    public void afterCLass(){
+        BrowserFactory.getInstance().getDriver().quit();
+    }
 
 
 }

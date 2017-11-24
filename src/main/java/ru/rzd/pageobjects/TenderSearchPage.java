@@ -41,8 +41,19 @@ public class TenderSearchPage extends AbstractPage {
     @FindBy(xpath = "//*[@id=\"container\"]//table[@class=\"table\"]/tbody/tr/td[2]")
     private List<WebElement> resultList;
 
+    public List<WebElement> getGoods() {
+        return goods;
+    }
 
-    public TenderSearchPage fillTheSearch() {
+    public List<WebElement> getCities() {
+        return cities;
+    }
+
+    public List<WebElement> getResultList() {
+        return resultList;
+    }
+
+    public TenderSearchPage fillTheSearchForm() {
         Select selectObjectType = new Select(objectType);
         selectObjectType.selectByVisibleText("товары");
         Select selectCity = new Select(place);
@@ -57,23 +68,8 @@ public class TenderSearchPage extends AbstractPage {
         return this;
     }
 
-    public int goodsAmount(){
-        return goods.size();
-    }
-
-    public int citiesAmount(){
-        return cities.size();
-    }
 
 
-    public boolean containsCorrectDate(){
-        boolean res = false;
-        for (WebElement n: resultList) {
-            if(n.getText().contains(today))
-             res = true;
-        }
-        return res;
-    }
 
 
 

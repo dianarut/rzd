@@ -27,6 +27,9 @@ public class AbstractPage {
         new WebDriverWait(driver, seconds).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
+    protected void waitForElementVisible(WebElement webElement, int seconds) {
+        new WebDriverWait(driver, seconds ).until((ExpectedConditions.visibilityOf(webElement)));}
+
     public String getTitleFromDriver() {
         String title = driver.getTitle();
         return title;

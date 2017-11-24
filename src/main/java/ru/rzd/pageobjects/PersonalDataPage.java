@@ -19,31 +19,31 @@ public class PersonalDataPage extends AbstractPage {
     private static final String PASS_NUMBER = ConfigurationManager.getProperty("passport.number");
     private final boolean CHECK = false;
 
-    @FindBy(xpath = "//input[@fieldName = 'lastName']")
+    @FindBy(xpath = "//input[@name = 'lastName']")
     private WebElement fieldSurname;
 
-    @FindBy(xpath = "//input[@fieldName = 'firstName']")
+    @FindBy(xpath = "//input[@name = 'firstName']")
     private WebElement fieldName;
 
-    @FindBy(xpath = "//input[@fieldName = 'midName']")
+    @FindBy(xpath = "//input[@name = 'midName']")
     private WebElement fieldMidname;
 
-    @FindBy(xpath = "//select[@fieldName='gender']")
+    @FindBy(xpath = "//select[@name='gender']")
     private WebElement fieldGender;
 
     @FindBy(name = "birthdate")
     private WebElement fieldBirthday;
 
-    @FindBy(xpath = "//select[@fieldName='docType']")
+    @FindBy(xpath = "//select[@name='docType']")
     private WebElement listOfdocTypes;
 
-    @FindBy(xpath = "//input[@fieldName='docNumber']")
+    @FindBy(xpath = "//input[@name='docNumber']")
     private WebElement fieldDocNumber;
 
-    @FindBy(xpath = "//select[@fieldName='country']")
+    @FindBy(xpath = "//select[@name='country']")
     private WebElement listOfCountries;
 
-    @FindBy(xpath = "//input[@fieldName='bInsurance']")
+    @FindBy(xpath = "//input[@name='bInsurance']")
     private WebElement checkBoxInsurance;
 
     @FindBy(xpath = "//*[contains(@class, 's-cell s-type-up')]")
@@ -61,56 +61,24 @@ public class PersonalDataPage extends AbstractPage {
     @FindBy(xpath = ".//*[@class='rn-array'][count(.//*[child:: *[@id='Layer_1']])=2]")
     private WebElement seatsForms;
 
-
-    public PersonalDataPage inputSurname(String lastname){
+    public PersonalDataPage fillThePassengerDataForm() {
         fieldSurname.clear();
-        fieldSurname.sendKeys(lastname);
-        return this;
-    }
-    public PersonalDataPage inputName(String firstName){
+        fieldSurname.sendKeys(LAST_NAME);
         fieldName.clear();
-        fieldName.sendKeys(firstName);
-        return this;
-    }
-
-    public  PersonalDataPage inputMidName(String fathername){
+        fieldName.sendKeys(FIRST_NAME);
         fieldMidname.clear();
-        fieldMidname.sendKeys(fathername);
-        return this;
-    }
-
-    public PersonalDataPage chooseGender(String sex) {
+        fieldMidname.sendKeys(FATHER_NAME);
         Select selectGender = new Select(fieldGender);
-        selectGender.selectByVisibleText(sex);
-        return this;
-    }
-
-    public PersonalDataPage inputBirthday(String day) {
+        selectGender.selectByVisibleText(SEX);
         fieldBirthday.clear();
-        fieldBirthday.sendKeys(day);
-        return this;
-    }
-
-    public PersonalDataPage chooseDocType() {
+        fieldBirthday.sendKeys(B_DAY);
         Select selectDoc = new Select(listOfdocTypes);
         selectDoc.selectByValue("4");
-        return this;
-    }
-
-    public PersonalDataPage inputDocNumber(String number){
         fieldDocNumber.clear();
-        fieldDocNumber.sendKeys(number);
-        return this;
-    }
-
-    public PersonalDataPage chooseCountry() {
+        fieldDocNumber.sendKeys(PASS_NUMBER);
         Select selectCountry = new Select(listOfCountries);
         selectCountry.selectByValue("19");
-        return this;
-    }
-
-    public PersonalDataPage uncheckInsurance(boolean check){
-        if (!check && checkBoxInsurance.isSelected()) {
+        if (!CHECK && checkBoxInsurance.isSelected()) {
             checkBoxInsurance.click();
         }
         return this;
@@ -129,20 +97,6 @@ public class PersonalDataPage extends AbstractPage {
     public PayAgreementPage reserveTicket() {
         buttonReserve.click();
         return new PayAgreementPage();
-    }
-
-    public PersonalDataPage fillTheForm() {
-        PersonalDataPage personalDataPage = new PersonalDataPage();
-        personalDataPage.inputSurname(LAST_NAME);
-        personalDataPage.inputName(FIRST_NAME);
-        personalDataPage.inputMidName(FATHER_NAME);
-        personalDataPage.chooseGender(SEX);
-        personalDataPage.inputBirthday(B_DAY);
-        personalDataPage.chooseDocType();
-        personalDataPage.inputDocNumber(PASS_NUMBER);
-        personalDataPage.chooseCountry();
-        personalDataPage.uncheckInsurance(CHECK);
-        return this;
     }
 
     public PersonalDataPage chooseSeatTo() {

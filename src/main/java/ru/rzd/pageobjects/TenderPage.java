@@ -12,11 +12,13 @@ public class TenderPage extends AbstractPage{
     private WebElement buttonPlannedPurchase;
 
     public TenderPlannedPurchasesPage openPlannedpurchasePage(){
+        waitForElementVisible(buttonPlannedPurchase, 3);
         buttonPlannedPurchase.click();
         return new TenderPlannedPurchasesPage();
     }
 
     public TenderSearchPage openTenderSearchPage(){
+        waitForElementVisible(buttonSearch, 3);
         buttonSearch.click();
         return new TenderSearchPage();
     }

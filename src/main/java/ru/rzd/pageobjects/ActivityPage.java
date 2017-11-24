@@ -11,7 +11,7 @@ public class ActivityPage extends AbstractPage {
     @FindBy(xpath = "(//li/a[contains(text(), '2011')])[1]")
     private WebElement linkTo2011report;
 
-    public ActivityPage click2011() {
+    public ActivityPage clickLinkTo2011report() {
         tabSwitcher();
         linkTo2011report.click();
         return this;
@@ -20,7 +20,7 @@ public class ActivityPage extends AbstractPage {
     @FindBy(xpath = "//a[@target='_self']")
     private WebElement linkToGamesPage;
 
-    public GamesPage clickTheLink() {
+    public GamesPage clickLinklinkToGamesPage() {
         linkToGamesPage.click();
         return new GamesPage();
     }

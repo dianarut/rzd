@@ -49,7 +49,7 @@ public class BuyingTicketSeeScheduleTest{
     @Test(dependsOnMethods = "chooseTrainAndPlacePage")
     public void personalDataPage(){
         PersonalDataPage personalDataPage = new PersonalDataPage();
-        personalDataPage.fillTheForm();
+        personalDataPage.fillThePassengerDataForm();
         Assert.assertTrue(personalDataPage.checkSeatsLayout(), "There are no seats!");
         personalDataPage.chooseSeatTo();
         personalDataPage.chooseSeatFrom();

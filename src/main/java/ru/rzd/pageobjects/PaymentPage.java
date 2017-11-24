@@ -7,11 +7,11 @@ import java.util.List;
 
 public class PaymentPage extends AbstractPage {
 
-    @FindBy(xpath = "//title[text()='TW Payment Gateway']")
-    private List<WebElement> paypage;
+    @FindBy(xpath = "//*[contains(text(),'CVV')]")
+    private List<WebElement> payPageAtribute;
 
-    public boolean isPayPage(){
-        return paypage.size()>0;
+    public List<WebElement> getPayPageAtribute() {
+        return payPageAtribute;
     }
 
 }
