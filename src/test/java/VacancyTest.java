@@ -1,7 +1,7 @@
-import com.rzd.selenium.factory.BrowserFactory;
-import com.rzd.selenium.pageobjects.MainPage;
-import com.rzd.selenium.pageobjects.VacancyPage;
-import com.rzd.selenium.util.ConfigurationManager;
+import ru.rzd.factory.BrowserFactory;
+import ru.rzd.pageobjects.MainPage;
+import ru.rzd.pageobjects.VacancyPage;
+import ru.rzd.util.ConfigurationManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;

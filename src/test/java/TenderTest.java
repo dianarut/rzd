@@ -1,26 +1,29 @@
 
-import com.rzd.selenium.pageobjects.MainPage;
-import com.rzd.selenium.pageobjects.TenderPage;
-import com.rzd.selenium.pageobjects.TenderPlannedPurchasesPage;
-import com.rzd.selenium.pageobjects.TenderSearchPage;
-import com.rzd.selenium.util.ConfigurationManager;
-import com.rzd.selenium.util.Downloader;
+import ru.rzd.pageobjects.MainPage;
+import ru.rzd.pageobjects.TenderPage;
+import ru.rzd.pageobjects.TenderPlannedPurchasesPage;
+import ru.rzd.pageobjects.TenderSearchPage;
+import ru.rzd.util.AssertManager;
+import ru.rzd.util.ConfigurationManager;
+import ru.rzd.util.Downloader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.rzd.util.TimeUtil;
 
 
 public class TenderTest {
 
-    private String downloadPath = ConfigurationManager.getProperty("tender.downloadPath");
+    private String dirWhereTodownload = ConfigurationManager.getProperty("tender.downloadPath");
+    private String today = TimeUtil.getCurrentDate();
 
     @Test
-    public void plannedPurchaseTest() {
+    public void downloadingPurchasePlanTest() {
         MainPage mainPage = new MainPage();
         TenderPage tenderPage = mainPage.openTenderPage();
         TenderPlannedPurchasesPage tenderPlannedPurchasesPage = tenderPage.openPlannedpurchasePage();
         tenderPlannedPurchasesPage.downloadPurshasingPlan();
-        String filename = tenderPlannedPurchasesPage.docName();
-        Assert.assertTrue(Downloader.isFileDownloaded(downloadPath, filename));
+        String downloadedFileName = tenderPlannedPurchasesPage.getFilePurchaisePlan2017().getText();
+        Assert.assertTrue(Downloader.isFileDownloaded(dirWhereTodownload, downloadedFileName));
 
     }
 
@@ -29,9 +32,9 @@ public class TenderTest {
         MainPage mainPage = new MainPage();
         TenderPage tenderPage = mainPage.openTenderPage();
         TenderSearchPage tenderSearchPage = tenderPage.openTenderSearchPage();
-        tenderSearchPage.fillTheSearch();
+        tenderSearchPage.fillTheSearchForm();
         tenderSearchPage.search();
-        Assert.assertTrue((tenderSearchPage.containsCorrectDate())&&(tenderSearchPage.citiesAmount()==tenderSearchPage.goodsAmount()));
+        Assert.assertTrue(AssertManager.isResultAfterFiltrationCorrect(tenderSearchPage.getGoods(), tenderSearchPage.getCities(), tenderSearchPage.getResultList(), today));
     }
 
 
