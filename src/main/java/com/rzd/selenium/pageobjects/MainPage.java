@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.rzd.selenium.util.TimeUtil.generateDate;
+import static com.rzd.selenium.util.TimeUtil.getCurrentDatePlusAmountOfDays;
 
 public class MainPage extends AbstractPage {
 
@@ -114,7 +114,7 @@ public class MainPage extends AbstractPage {
         justClick();
         fillToField(to);
         justClick();
-        setDateField(generateDate(plusDaysToCurrentDate));
+        setDateField(getCurrentDatePlusAmountOfDays(plusDaysToCurrentDate));
         justClick();
         clickSearchButton();
         return this;

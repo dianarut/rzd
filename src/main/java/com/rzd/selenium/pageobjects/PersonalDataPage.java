@@ -17,6 +17,7 @@ public class PersonalDataPage extends AbstractPage {
     private static final String SEX = ConfigurationManager.getProperty("passport.gender");
     private static final String B_DAY = ConfigurationManager.getProperty("passport.birthday");
     private static final String PASS_NUMBER = ConfigurationManager.getProperty("passport.number");
+    private final boolean CHECK = false;
 
     @FindBy(xpath = "//input[@name = \"lastName\"]")
     private WebElement surname;
@@ -140,7 +141,7 @@ public class PersonalDataPage extends AbstractPage {
         personalDataPage.chooseDocType();
         personalDataPage.inputDocNumber(PASS_NUMBER);
         personalDataPage.chooseCountry();
-        personalDataPage.uncheckInsurance(check);
+        personalDataPage.uncheckInsurance(CHECK);
         return this;
     }
 

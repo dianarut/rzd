@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TenderSearchPage extends AbstractPage {
 
-    private String today = TimeUtil.getCurrentCalendar();
+    private String today = TimeUtil.getCurrentDate();
 
     @FindBy(xpath = "//select[@name=\"property_type_id\"]")
     private WebElement objectType;
