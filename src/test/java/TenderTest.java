@@ -1,10 +1,10 @@
 
-import com.rzd.selenium.pageobjects.MainPage;
-import com.rzd.selenium.pageobjects.TenderPage;
-import com.rzd.selenium.pageobjects.TenderPlannedPurchasesPage;
-import com.rzd.selenium.pageobjects.TenderSearchPage;
-import com.rzd.selenium.util.ConfigurationManager;
-import com.rzd.selenium.util.Downloader;
+import ru.rzd.pageobjects.MainPage;
+import ru.rzd.pageobjects.TenderPage;
+import ru.rzd.pageobjects.TenderPlannedPurchasesPage;
+import ru.rzd.pageobjects.TenderSearchPage;
+import ru.rzd.util.ConfigurationManager;
+import ru.rzd.util.Downloader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
