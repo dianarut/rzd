@@ -1,5 +1,6 @@
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.*;
+import ru.rzd.util.AssertManager;
 import ru.rzd.util.ConfigurationManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,18 +32,18 @@ public class BuyingTicketFromMainPage{
     @Test(dependsOnMethods = "choosePlace")
     public void passengerDataInput() {
         PersonalDataPage personalDataPage = new PersonalDataPage();
-        personalDataPage.fillTheForm();
+        personalDataPage.fillThePassengerDataForm();
         personalDataPage.chooseSeat();
         PayAgreementPage payAgreementPage = personalDataPage.reserveTicket();
-        Assert.assertTrue(payAgreementPage.isReservationMessage() > 0);
+        Assert.assertTrue(AssertManager.isElementPresent(payAgreementPage.getReservationMessage()));
     }
 
     @Test(dependsOnMethods = {"passengerDataInput"})
     public void agreementPage() {
         PayAgreementPage payAgreementPage = new PayAgreementPage();
-        payAgreementPage.agreeWithTerms();
-        payAgreementPage.goToPayment();
+        payAgreementPage.checkAgreeWithTermsBox();
+        payAgreementPage.goToPaymentPage();
         PaymentPage paymentPage = new PaymentPage();
-        Assert.assertTrue(paymentPage.isPayPage() > 0);
+        Assert.assertTrue(AssertManager.isElementPresent(paymentPage.getPayPageAtribute()));
     }
 }

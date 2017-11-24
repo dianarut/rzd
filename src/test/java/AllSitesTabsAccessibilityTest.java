@@ -1,5 +1,7 @@
+import org.testng.annotations.AfterClass;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.*;
+import ru.rzd.util.AssertManager;
 import ru.rzd.util.ConfigurationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -7,7 +9,7 @@ import org.testng.annotations.Test;
 
 
 
-public class AllSitesTabTest {
+public class AllSitesTabsAccessibilityTest {
 
     private MainPage mainPage;
 
@@ -16,32 +18,35 @@ public class AllSitesTabTest {
         BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
     }
 
-    @Test(priority=2)
+    @Test
     public void forInvestorsAccessibility() throws InterruptedException {
         mainPage = new MainPage();
         AllSitesPage allSitesPage = mainPage.openAllSitesPage();
         ForInvestorsPage forInvestorsPage = allSitesPage.openInvestoramPage();
-        Assert.assertTrue(forInvestorsPage.isForInvestorsPage()>0 );
+        Assert.assertTrue(AssertManager.isElementPresent(forInvestorsPage.getInvestoramPageAtribute()));
     }
 
-    @Test(priority=1) //тест будет падать, тк ссылка на страницу не работает. так было задумано
+    @Test //тест будет падать, тк ссылка на страницу не работает. так было задумано
     public void restAndTreatmentAccessibility()  {
         mainPage = new MainPage();
         AllSitesPage allSitesPage = mainPage.openAllSitesPage();
         RestAndTreatmentPage restAndTreatmentPage = allSitesPage.openRestAndTreatmentPage();
-        Assert.assertTrue(restAndTreatmentPage.isRestAndTreatmentPage() > 0, "Rest and Treatment failed");
+        Assert.assertTrue(AssertManager.isElementPresent(restAndTreatmentPage.getRestAndtreatmentPageAtribute()), "Rest and Treatment page failed");
     }
 
-    @Test(priority=3) //тест будет падать, тк ссылка на страницу не работает. так было задумано
+    @Test //тест будет падать, тк ссылка на страницу не работает. так было задумано
     public void gamesAccessibility(){
         mainPage = new MainPage();
         ActivityPage activityPage = mainPage.openActivityPage();
-        activityPage.switchTabInBrowser();
-        activityPage.click2011();
-        GamesPage gamesPage = activityPage.clickTheLink();
-        Assert.assertTrue(gamesPage.isGamesPage()>0);
+        activityPage.clickLinkTo2011report();
+        GamesPage gamesPage = activityPage.clickLinklinkToGamesPage();
+        Assert.assertTrue(AssertManager.isElementPresent(gamesPage.getGamesPageAtribute()), "Games page failed");
     }
 
+    @AfterClass
+    public void afterCLass(){
+        BrowserFactory.getInstance().getDriver().quit();
+    }
 
 
 }

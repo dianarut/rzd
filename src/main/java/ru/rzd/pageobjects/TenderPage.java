@@ -5,22 +5,21 @@ import org.openqa.selenium.support.FindBy;
 
 public class TenderPage extends AbstractPage{
 
-    @FindBy(xpath = "//a[@class=\"btn btn-color-red\"]")
-    private WebElement searchButton;
+    @FindBy(xpath = "//a[@class='btn btn-color-red']")
+    private WebElement buttonSearch;
 
-    @FindBy(xpath = "//img[@title = \"Закупочная площадка\"]")
-    private WebElement purchasingArea;
-
-    @FindBy(xpath = "//img[@title = \"Планируемые закупки\"]")
-    private WebElement plannedPurchase;
+    @FindBy(xpath = "//img[@title = 'Планируемые закупки']")
+    private WebElement buttonPlannedPurchase;
 
     public TenderPlannedPurchasesPage openPlannedpurchasePage(){
-        plannedPurchase.click();
+        waitForElementVisible(buttonPlannedPurchase, 3);
+        buttonPlannedPurchase.click();
         return new TenderPlannedPurchasesPage();
     }
 
     public TenderSearchPage openTenderSearchPage(){
-        searchButton.click();
+        waitForElementVisible(buttonSearch, 3);
+        buttonSearch.click();
         return new TenderSearchPage();
     }
 }

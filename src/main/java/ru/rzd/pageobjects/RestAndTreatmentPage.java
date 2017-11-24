@@ -7,10 +7,11 @@ import java.util.List;
 
 public class RestAndTreatmentPage extends AbstractPage{
 
-    @FindBy(xpath = "//title[text()='Отдых и лечение']")
-    private List<WebElement> restPageTitle;
+    @FindBy(xpath = "//*[contains(text(),'Отдых и лечение')]")
+    private List<WebElement> restAndtreatmentPageAtribute;
 
-    public int isRestAndTreatmentPage (){
-        return restPageTitle.size();
+    public List<WebElement> getRestAndtreatmentPageAtribute() {
+        return restAndtreatmentPageAtribute;
     }
+
 }

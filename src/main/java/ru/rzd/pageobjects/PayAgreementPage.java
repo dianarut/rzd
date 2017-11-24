@@ -12,22 +12,22 @@ public class PayAgreementPage extends AbstractPage {
     @FindBy(xpath = "//h3[text()='Ваши места успешно забронированы!']")
     private List<WebElement> reservationMessage;
 
-    @FindBy(xpath = "//input[@type=\"checkbox\" and @class=\"j-confirm\"]")
+    @FindBy(xpath = "//input[@type='checkbox' and @class='j-confirm']")
     private WebElement agreeButton;
 
     @FindBy(xpath = "//span[text()='Перейти к оплате']")
     private WebElement goToPaymentButton;
 
-    public PaymentPage goToPayment() {
+    public List<WebElement> getReservationMessage() {
+        return reservationMessage;
+    }
+
+    public PaymentPage goToPaymentPage() {
         goToPaymentButton.click();
         return new PaymentPage();
     }
 
-    public int isReservationMessage() {
-        return reservationMessage.size();
-    }
-
-    public PayAgreementPage agreeWithTerms() {
+    public PayAgreementPage checkAgreeWithTermsBox() {
         super.waitForElementEnabled(agreeButton, 2);
         agreeButton.click();
         return this;
