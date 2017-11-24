@@ -28,13 +28,13 @@ public class AbstractPage {
     }
 
     protected void waitForElementVisible(WebElement webElement, int seconds) {
-        new WebDriverWait(driver, seconds ).until((ExpectedConditions.visibilityOf(webElement)));}
+        new WebDriverWait(driver, seconds).until((ExpectedConditions.visibilityOf(webElement)));
+    }
 
     public String getTitleFromDriver() {
         String title = driver.getTitle();
         return title;
     }
-
 
     public void tabSwitcher() {
         ArrayList<String> tabs2 = new ArrayList<>(driver.getWindowHandles());

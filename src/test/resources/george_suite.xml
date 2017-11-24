@@ -4,7 +4,7 @@
     <test name="georgeTest">
         <classes>
             <class name="BuyingTicketForSuburbanTrain_RU"/>
-            <class name="EngVersion"/>
+            <class name="BuyingTicketForSuburbanTrain_ENG"/>
         </classes>
     </test>
 </suite>
