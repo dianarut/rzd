@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.rzd.selenium.util.TimeUtil.generateDate;
+import static com.rzd.selenium.util.TimeUtil.getCurrentDatePlusAmountOfDays;
 
 public class MainPage extends AbstractPage {
 
@@ -63,6 +63,12 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = ".//*[@class='greyBlock'][child:: *[@id='ticketbuyforma_horizontal']]")
     private WebElement passengersForm;
 
+    @FindBy(xpath = ".//*[@class='station'][1]")
+    private WebElement textFromStation;
+
+    @FindBy(xpath = ".//*[@class='dropList'][2]/*[@class='station'][1]")
+    private WebElement textToStation;
+
     public MainPageEng goToEngVersion() {
         englishFlagButton.click();
         return new MainPageEng();
@@ -114,9 +120,8 @@ public class MainPage extends AbstractPage {
         justClick();
         fillToField(to);
         justClick();
-        setDateField(generateDate(plusDaysToCurrentDate));
+        setDateField(getCurrentDatePlusAmountOfDays(plusDaysToCurrentDate));
         justClick();
-        clickSearchButton();
         return this;
     }
 
@@ -153,12 +158,20 @@ public class MainPage extends AbstractPage {
         return new ActivityPage();
     }
 
-    public boolean checkPassengersFrom(){
-        try {
-            super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersForm));
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+//    public boolean checkPassengersFrom(){
+//        try {
+//            super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersForm));
+//            return true;
+//        } catch (TimeoutException e) {
+//            return false;
+//        }
+//    }
+
+    public String checkFromStations() {
+        return textFromStation.getAttribute("textContent");
+    }
+
+    public String checkToStations() {
+        return textToStation.getAttribute("textContent");
     }
 }

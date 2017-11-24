@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class PersonalDataPage extends AbstractPage {
     private static final String SEX = ConfigurationManager.getProperty("passport.gender");
     private static final String B_DAY = ConfigurationManager.getProperty("passport.birthday");
     private static final String PASS_NUMBER = ConfigurationManager.getProperty("passport.number");
+    private final boolean CHECK = false;
 
     @FindBy(xpath = "//input[@name = \"lastName\"]")
     private WebElement surname;
@@ -60,13 +62,13 @@ public class PersonalDataPage extends AbstractPage {
     @FindBy(xpath = ".//*[@class='rn-array'][count(.//*[child:: *[@id='Layer_1']])=2]")
     private WebElement seatsForms;
 
-
-    public PersonalDataPage inputSurname(String lastname){
+    public PersonalDataPage inputSurname(String lastname) {
         surname.clear();
         surname.sendKeys(lastname);
         return this;
     }
-    public PersonalDataPage inputName(String firstName){
+
+    public PersonalDataPage inputName(String firstName) {
         name.clear();
         name.sendKeys(firstName);
         return this;
@@ -84,13 +86,13 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage inputBirthday(String day) {
+    public PersonalDataPage inputBirthday(String day){
         birthday.clear();
         birthday.sendKeys(day);
         return this;
     }
 
-    public PersonalDataPage chooseDocType() {
+    public PersonalDataPage chooseDocType(){
         Select selectDoc = new Select(docType);
         selectDoc.selectByValue("4");
         return this;
@@ -102,7 +104,7 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage chooseCountry() {
+    public PersonalDataPage chooseCountry(){
         Select selectCountry = new Select(country);
         selectCountry.selectByValue("19");
         return this;
@@ -115,9 +117,9 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PersonalDataPage chooseSeat() {
-        for (int i = 0; i <= seats.size(); i++)
-            if (seats.get(i).isEnabled()) {
+    public PersonalDataPage chooseSeat(){
+       for(int i=0; i<=seats.size(); i++)
+            if(seats.get(i).isEnabled()){
                 seats.get(i).click();
                 break;
             }
@@ -125,7 +127,7 @@ public class PersonalDataPage extends AbstractPage {
         return this;
     }
 
-    public PayAgreementPage reserveTicket() {
+    public PayAgreementPage reserveTicket(){
         reserveButton.click();
         return new PayAgreementPage();
     }
@@ -140,16 +142,16 @@ public class PersonalDataPage extends AbstractPage {
         personalDataPage.chooseDocType();
         personalDataPage.inputDocNumber(PASS_NUMBER);
         personalDataPage.chooseCountry();
-        personalDataPage.uncheckInsurance(check);
+        personalDataPage.uncheckInsurance(CHECK);
         return this;
     }
 
-    public PersonalDataPage chooseSeatTo() {
+    public PersonalDataPage chooseSeatTo(){
         seatsTo.click();
         return this;
     }
 
-    public PersonalDataPage chooseSeatFrom() {
+    public PersonalDataPage chooseSeatFrom(){
         seatsFrom.click();
         return this;
     }

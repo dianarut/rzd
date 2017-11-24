@@ -1,16 +1,16 @@
 import com.rzd.selenium.factory.BrowserFactory;
-import com.rzd.selenium.pageobjects.*;
+import com.rzd.selenium.pageobjects.ChooseTrainAndPlacePage;
+import com.rzd.selenium.pageobjects.MainPage;
+import com.rzd.selenium.pageobjects.PassengerMainPage;
+import com.rzd.selenium.pageobjects.PersonalDataPage;
 import com.rzd.selenium.util.ConfigurationManager;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class BuyingTicketSeeScheduleTest{
-    private String from = ConfigurationManager.getProperty("movement.base.to");
-    private String to = ConfigurationManager.getProperty("movement.base.from");
-    private String loginPageTitle = ConfigurationManager.getProperty("page.login.title");
+    private String from = ConfigurationManager.getProperty("movement.base.from");
+    private String to = ConfigurationManager.getProperty("movement.base.to");
     private String passengerMainTitle = ConfigurationManager.getProperty("page.passengerMain.title");
     private int plusDaysToCurrentDate = Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
 
@@ -22,30 +22,17 @@ public class BuyingTicketSeeScheduleTest{
     @Test
     public void mainPage() {
         MainPage mainPage = new MainPage();
-        Assert.assertTrue(mainPage.checkPassengersFrom(), "There are no passengers form!");
         mainPage.clickPassengersButton();
-    }
-
-    @Test(dependsOnMethods = "mainPage")
-    public void passengerMainPage() {
         PassengerMainPage passengerMainPage = new PassengerMainPage();
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
-        String expectedTitle = passengerMainTitle;
-        Assert.assertEquals(actualTitle, expectedTitle);
         passengerMainPage.fillForm(from, to, plusDaysToCurrentDate);
-    }
-
-    @Test(dependsOnMethods = "passengerMainPage")
-    public void chooseTrainAndPlacePage() {
         ChooseTrainAndPlacePage chooseTrainAndPlacePage = new ChooseTrainAndPlacePage();
+        System.out.println(from.toLowerCase());
+        //Assert.assertTrue(checkFromStation(from));
         chooseTrainAndPlacePage.selectTrainsAndCarriges();
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
-        String expectedTitle = passengerMainTitle;
-        Assert.assertEquals(actualTitle, expectedTitle);
         chooseTrainAndPlacePage.goToPassengersDateInputButton();
     }
 
-    @Test(dependsOnMethods = "chooseTrainAndPlacePage")
+    @Test(dependsOnMethods = "mainPage")
     public void personalDataPage(){
         PersonalDataPage personalDataPage = new PersonalDataPage();
         personalDataPage.fillTheForm();
