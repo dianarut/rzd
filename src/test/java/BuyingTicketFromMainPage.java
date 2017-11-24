@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 public class BuyingTicketFromMainPage{
 
-    private String from = ConfigurationManager.getProperty("movement.base.to");
-    private String to = ConfigurationManager.getProperty("movement.base.from");
+    private String from = ConfigurationManager.getProperty("movement.base.from");
+    private String to = ConfigurationManager.getProperty("movement.base.to");
     private int plusDaysToCurrentDate = Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
     private String loginPageTitle = ConfigurationManager.getProperty("page.login.title");
 
@@ -16,10 +16,10 @@ public class BuyingTicketFromMainPage{
     @Test
     public void fillForPassengersForm() {
         MainPage mainPage = new MainPage();
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
-        String expectedTitle = loginPageTitle;
-        Assert.assertEquals(actualTitle, expectedTitle);
         mainPage.fillForPassengersForm(to, from, plusDaysToCurrentDate);
+        Assert.assertEquals(mainPage.checkFromStations(), from);
+        Assert.assertEquals(mainPage.checkToStations(), to);
+        mainPage.clickSearchButton();
     }
 
     @Test(dependsOnMethods = "fillForPassengersForm")

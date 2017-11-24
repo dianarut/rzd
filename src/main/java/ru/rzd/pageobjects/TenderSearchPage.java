@@ -67,16 +67,6 @@ public class TenderSearchPage extends AbstractPage {
         searchButton.click();
         return this;
     }
-
-
-
-
-
-
-
-
-
-
 }
 
 
