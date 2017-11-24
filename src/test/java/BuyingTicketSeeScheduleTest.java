@@ -3,6 +3,7 @@ import com.rzd.selenium.pageobjects.*;
 import com.rzd.selenium.util.ConfigurationManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -13,18 +14,15 @@ public class BuyingTicketSeeScheduleTest{
     private String passengerMainTitle = ConfigurationManager.getProperty("page.passengerMain.title");
     private int plusDaysToCurrentDate = Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
 
-
-    @BeforeTest
-    public void goToMainPage() {
+    @BeforeClass
+    public void init2() {
         BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
     }
 
     @Test
     public void mainPage() {
         MainPage mainPage = new MainPage();
-        String actualTitle = BrowserFactory.getInstance().getDriver().getTitle();
-        String expectedTitle = loginPageTitle;
-        Assert.assertEquals(actualTitle, expectedTitle, "The page is wrong!");
+        Assert.assertTrue(mainPage.checkPassengersFrom(), "There are no passengers form!");
         mainPage.clickPassengersButton();
     }
 
@@ -51,6 +49,7 @@ public class BuyingTicketSeeScheduleTest{
     public void personalDataPage(){
         PersonalDataPage personalDataPage = new PersonalDataPage();
         personalDataPage.fillTheForm();
+        Assert.assertTrue(personalDataPage.checkSeatsLayout(), "There are no seats!");
         personalDataPage.chooseSeatTo();
         personalDataPage.chooseSeatFrom();
         String expectedTitle = passengerMainTitle;
@@ -61,17 +60,7 @@ public class BuyingTicketSeeScheduleTest{
 
     @Test(dependsOnMethods = "personalDataPage")
     public void payAgreementPage() {
-        PayAgreementPage payAgreementPage = new PayAgreementPage();
-        Assert.assertTrue(payAgreementPage.isReservationMessage() > 0);
-        payAgreementPage.agreeWithTerms();
-        payAgreementPage.goToPayment();
-        PaymentPage paymentPage = new PaymentPage();
-        Assert.assertTrue(paymentPage.isPayPage() > 0);
+        BuyingTicketFromMainPage buyingTicketFromMainPage = new BuyingTicketFromMainPage();
+        buyingTicketFromMainPage.agreementPage();
     }
-
-    @AfterSuite
-    public void close() {
-        BrowserFactory.getInstance().getDriver().quit();
-    }
-
 }
