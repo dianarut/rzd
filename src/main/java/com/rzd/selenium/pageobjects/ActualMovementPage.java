@@ -4,6 +4,7 @@ import com.rzd.selenium.factory.BrowserFactory;
 import com.rzd.selenium.util.ConfigurationManager;
 import com.rzd.selenium.util.TimeUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -30,28 +31,32 @@ public class ActualMovementPage extends AbstractPage{
     @FindBy(id = "nTrain")
     private WebElement trainNumber;
 
+    private WebDriver driver = BrowserFactory.getInstance().getDriver();
+    private static final String MOVEMENT_TO = ConfigurationManager.getProperty("movement.to");
+    private static final String MOVEMENT_BASE_TO = ConfigurationManager.getProperty("movement.base.to");
+    private static final String MOVEMENT_BASE_FROM = ConfigurationManager.getProperty("movement.base.from");
+    private static final String MOVEMENT_FROM = ConfigurationManager.getProperty("movement.from");
+    private static final String MOVEMENT_NUMBER = ConfigurationManager.getProperty("movement.number");
+    private static final int DAY = (TimeUtil.getCalendar().get(TimeUtil.getCalendar().DAY_OF_MONTH) - 1);
+
     public void fillArrive(){
-        arriveStationField.sendKeys(ConfigurationManager.getProperty("movement.base.to"));
-        BrowserFactory.getInstance().getDriver().findElement(By.xpath(".//div[@class='station' and text()='" +
-                ConfigurationManager.getProperty("movement.to") + "']")).click();
+        arriveStationField.sendKeys(MOVEMENT_BASE_TO);
+        driver.findElement(By.xpath(".//div[@class='station' and text()='" + MOVEMENT_TO + "']")).click();
     }
 
     public boolean pressButton(){
         submitButton.click();
-
         return resultList.isEmpty();
     }
 
     public void fillDeparture(){
-        departureStationField.sendKeys(ConfigurationManager.getProperty("movement.base.from"));
-        BrowserFactory.getInstance().getDriver().findElement(By.xpath(".//div[@class='station' and text()='" +
-                ConfigurationManager.getProperty("movement.from") + "']")).click();
+        departureStationField.sendKeys(MOVEMENT_BASE_FROM);
+        driver.findElement(By.xpath(".//div[@class='station' and text()='" + MOVEMENT_FROM + "']")).click();
         departureCalendar.click();
-        BrowserFactory.getInstance().getDriver().findElement(By.xpath(".//span[@class='select-time " +
-                "days45 near-time' and text()=" + (TimeUtil.getCalendar().get(TimeUtil.getCalendar().DAY_OF_MONTH) - 1) + "]")).click();
+        driver.findElement(By.xpath(".//span[@class='select-time days45 near-time' and text()=" + DAY + "]")).click();
     }
 
     public void fillTrainNumber(){
-        trainNumber.sendKeys(ConfigurationManager.getProperty("movement.number"));
+        trainNumber.sendKeys(MOVEMENT_NUMBER);
     }
 }
