@@ -7,12 +7,10 @@ import java.util.List;
 
 public class ForInvestorsPage extends AbstractPage {
 
-    @FindBy(xpath = "//title[text()='Инвесторам']")
-    private List<WebElement> investoramPageTitle;
+    @FindBy(xpath = "//*[contains(text(),'Новости для инвесторов')]")
+    private List<WebElement> investoramPageAtribute;
 
-    public int isForInvestorsPage() {
-        return investoramPageTitle.size();
+    public List<WebElement> getInvestoramPageAtribute() {
+        return investoramPageAtribute;
     }
-
-
 }

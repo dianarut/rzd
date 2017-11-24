@@ -4,6 +4,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import ru.rzd.util.TimeUtil;
 
 public class MainPage extends AbstractPage {
@@ -61,6 +62,12 @@ public class MainPage extends AbstractPage {
 
     @FindBy(xpath = ".//*[@class='greyBlock'][child:: *[@id='ticketbuyforma_horizontal']]")
     private WebElement passengersForm;
+
+    @FindBy(xpath = ".//*[@class='station'][1]")
+    private WebElement textFromStation;
+
+    @FindBy(xpath = ".//*[@class='dropList'][2]/*[@class='station'][1]")
+    private WebElement textToStation;
 
     public MainPageEng goToEngVersion() {
         englishFlagButton.click();
@@ -152,12 +159,20 @@ public class MainPage extends AbstractPage {
         return new ActivityPage();
     }
 
-    public boolean checkPassengersFrom(){
-        try {
-            super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersForm));
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+//    public boolean checkPassengersFrom(){
+//        try {
+//            super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersForm));
+//            return true;
+//        } catch (TimeoutException e) {
+//            return false;
+//        }
+//    }
+
+    public String checkFromStations() {
+        return textFromStation.getAttribute("textContent");
+    }
+
+    public String checkToStations() {
+        return textToStation.getAttribute("textContent");
     }
 }

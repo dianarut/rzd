@@ -7,18 +7,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TenderPlannedPurchasesPage extends AbstractPage {
 
-
-
     @FindBy(xpath = "//a[text()='План закупок для нужд ОАО \"РЖД\" на 2017 год']")
-    public WebElement document;
+    public WebElement filePurchaisePlan2017;
 
-    public void downloadPurshasingPlan(){
-        super.webDriverWait().until(ExpectedConditions.visibilityOf(document));
-        document.click();
+    public TenderPlannedPurchasesPage downloadPurshasingPlan(){
+        waitForElementVisible(filePurchaisePlan2017, 3);
+        filePurchaisePlan2017.click();
+        return this;
     }
 
-    public String docName(){
-        return document.getText();
+    public WebElement getFilePurchaisePlan2017() {
+        return filePurchaisePlan2017;
     }
+
+
 
 }

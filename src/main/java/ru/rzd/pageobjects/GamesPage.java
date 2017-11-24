@@ -8,9 +8,10 @@ import java.util.List;
 public class GamesPage extends AbstractPage {
 
     @FindBy(xpath = "//*[contains(text(),'Олимпийские игры')]")
-    private List<WebElement> gamesPageTitle;
+    private List<WebElement> gamesPageAtribute;
 
-    public int isGamesPage() {
-        return gamesPageTitle.size();
+    public List<WebElement> getGamesPageAtribute() {
+        return gamesPageAtribute;
     }
+
 }

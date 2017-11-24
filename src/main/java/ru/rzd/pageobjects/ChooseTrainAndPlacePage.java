@@ -3,6 +3,9 @@ package ru.rzd.pageobjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class ChooseTrainAndPlacePage  extends AbstractPage {
 
@@ -53,6 +56,14 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
 
     @FindBy (xpath =".//*[text()='Перейти к вводу данных пассажира и выбору мест']")
     private WebElement goToPassengersDateInputButton;
+
+    @FindBy (xpath =".//*[@class='col-xs-12'][1][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
+    private  WebElement textFromStation;
+
+    public  WebElement getTextFromStation()
+    {
+        return textFromStation;
+    }
 
     public ChooseTrainAndPlacePage selectAnyTrainTo() {
         anyTrainTo.click();
@@ -110,6 +121,5 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
         selectAnyCarrigeBack();
         return this;
     }
-
 
 }
