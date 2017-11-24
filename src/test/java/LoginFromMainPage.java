@@ -1,7 +1,7 @@
-import com.rzd.selenium.factory.BrowserFactory;
-import com.rzd.selenium.pageobjects.LoginPage;
-import com.rzd.selenium.pageobjects.MainPage;
-import com.rzd.selenium.util.ConfigurationManager;
+import ru.rzd.factory.BrowserFactory;
+import ru.rzd.pageobjects.LoginPage;
+import ru.rzd.pageobjects.MainPage;
+import ru.rzd.util.ConfigurationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

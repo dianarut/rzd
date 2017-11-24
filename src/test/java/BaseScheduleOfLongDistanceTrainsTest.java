@@ -1,9 +1,11 @@
-import com.rzd.selenium.factory.BrowserFactory;
-import com.rzd.selenium.util.ConfigurationManager;
+import ru.rzd.factory.BrowserFactory;
+import ru.rzd.pageobjects.BasicScheduleLDTrainsResultsPage;
+import ru.rzd.pageobjects.BasicSchedulePage;
+import ru.rzd.pageobjects.MainPage;
+import ru.rzd.pageobjects.PassengerMainPage;
+import ru.rzd.util.ConfigurationManager;
 import org.testng.Assert;
-import com.rzd.selenium.pageobjects.*;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class BaseScheduleOfLongDistanceTrainsTest{

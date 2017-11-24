@@ -1,6 +1,6 @@
-import com.rzd.selenium.pageobjects.PayAgreementPage;
-import com.rzd.selenium.pageobjects.PaymentPage;
-import com.rzd.selenium.pageobjects.PersonalDataPage;
+import ru.rzd.pageobjects.PayAgreementPage;
+import ru.rzd.pageobjects.PaymentPage;
+import ru.rzd.pageobjects.PersonalDataPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
