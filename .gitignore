@@ -44,7 +44,7 @@ rzd_project/target/test-classes/TenderTest.class
 rzd_project/target/test-classes/SampleTest.class
 rzd_project/target/test-classes/EducationTest.class
 rzd_project/target/test-classes/BuyingTicketFromMainPage.class
-rzd_project/target/test-classes/AllSitesTabTest.class
+rzd_project/target/test-classes/AllSitesTabsAccessibilityTest.class
 rzd_project/target/classes/test
 rzd_project/target/classes/drivers/geckodriverwin.exe
 rzd_project/target/classes/drivers/geckodriver_mac

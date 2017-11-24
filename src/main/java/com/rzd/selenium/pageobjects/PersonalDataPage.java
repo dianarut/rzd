@@ -17,39 +17,40 @@ public class PersonalDataPage extends AbstractPage {
     private static final String SEX = ConfigurationManager.getProperty("passport.gender");
     private static final String B_DAY = ConfigurationManager.getProperty("passport.birthday");
     private static final String PASS_NUMBER = ConfigurationManager.getProperty("passport.number");
+    private final boolean CHECK = false;
 
-    @FindBy(xpath = "//input[@name = \"lastName\"]")
-    private WebElement surname;
+    @FindBy(xpath = "//input[@fieldName = 'lastName']")
+    private WebElement fieldSurname;
 
-    @FindBy(xpath = "//input[@name = \"firstName\"]")
-    private WebElement name;
+    @FindBy(xpath = "//input[@fieldName = 'firstName']")
+    private WebElement fieldName;
 
-    @FindBy(xpath = "//input[@name = \"midName\"]")
-    private WebElement midname;
+    @FindBy(xpath = "//input[@fieldName = 'midName']")
+    private WebElement fieldMidname;
 
-    @FindBy(xpath = "//select[@name=\"gender\"]")
-    private WebElement gender;
+    @FindBy(xpath = "//select[@fieldName='gender']")
+    private WebElement fieldGender;
 
     @FindBy(name = "birthdate")
-    private WebElement birthday;
+    private WebElement fieldBirthday;
 
-    @FindBy(xpath = "//select[@name=\"docType\"]")
-    private WebElement docType;
+    @FindBy(xpath = "//select[@fieldName='docType']")
+    private WebElement listOfdocTypes;
 
-    @FindBy(xpath = "//input[@name=\"docNumber\"]")
-    private WebElement docNumber;
+    @FindBy(xpath = "//input[@fieldName='docNumber']")
+    private WebElement fieldDocNumber;
 
-    @FindBy(xpath = "//select[@name=\"country\"]")
-    private WebElement country;
+    @FindBy(xpath = "//select[@fieldName='country']")
+    private WebElement listOfCountries;
 
-    @FindBy(xpath = "//input[@name=\"bInsurance\"]")
-    private WebElement insurance;
+    @FindBy(xpath = "//input[@fieldName='bInsurance']")
+    private WebElement checkBoxInsurance;
 
     @FindBy(xpath = "//*[contains(@class, 's-cell s-type-up')]")
-    private List<WebElement> seats;
+    private List<WebElement> listOfSeats;
 
-    @FindBy(xpath = "//button[@type=\"submit\" and text()='Зарезервировать места']")
-    private WebElement reserveButton;
+    @FindBy(xpath = "//button[@type='submit' and text()='Зарезервировать места']")
+    private WebElement buttonReserve;
 
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo']")
     private WebElement seatsTo;
@@ -62,63 +63,63 @@ public class PersonalDataPage extends AbstractPage {
 
 
     public PersonalDataPage inputSurname(String lastname){
-        surname.clear();
-        surname.sendKeys(lastname);
+        fieldSurname.clear();
+        fieldSurname.sendKeys(lastname);
         return this;
     }
     public PersonalDataPage inputName(String firstName){
-        name.clear();
-        name.sendKeys(firstName);
+        fieldName.clear();
+        fieldName.sendKeys(firstName);
         return this;
     }
 
     public  PersonalDataPage inputMidName(String fathername){
-        midname.clear();
-        midname.sendKeys(fathername);
+        fieldMidname.clear();
+        fieldMidname.sendKeys(fathername);
         return this;
     }
 
     public PersonalDataPage chooseGender(String sex) {
-        Select selectGender = new Select(gender);
+        Select selectGender = new Select(fieldGender);
         selectGender.selectByVisibleText(sex);
         return this;
     }
 
     public PersonalDataPage inputBirthday(String day) {
-        birthday.clear();
-        birthday.sendKeys(day);
+        fieldBirthday.clear();
+        fieldBirthday.sendKeys(day);
         return this;
     }
 
     public PersonalDataPage chooseDocType() {
-        Select selectDoc = new Select(docType);
+        Select selectDoc = new Select(listOfdocTypes);
         selectDoc.selectByValue("4");
         return this;
     }
 
     public PersonalDataPage inputDocNumber(String number){
-        docNumber.clear();
-        docNumber.sendKeys(number);
+        fieldDocNumber.clear();
+        fieldDocNumber.sendKeys(number);
         return this;
     }
 
     public PersonalDataPage chooseCountry() {
-        Select selectCountry = new Select(country);
+        Select selectCountry = new Select(listOfCountries);
         selectCountry.selectByValue("19");
         return this;
     }
 
     public PersonalDataPage uncheckInsurance(boolean check){
-        if (!check && insurance.isSelected()) {
-            insurance.click();
+        if (!check && checkBoxInsurance.isSelected()) {
+            checkBoxInsurance.click();
         }
         return this;
     }
 
     public PersonalDataPage chooseSeat() {
-        for (int i = 0; i <= seats.size(); i++)
-            if (seats.get(i).isEnabled()) {
-                seats.get(i).click();
+        for (int i = 0; i <= listOfSeats.size(); i++)
+            if (listOfSeats.get(i).isEnabled()) {
+                listOfSeats.get(i).click();
                 break;
             }
 
@@ -126,7 +127,7 @@ public class PersonalDataPage extends AbstractPage {
     }
 
     public PayAgreementPage reserveTicket() {
-        reserveButton.click();
+        buttonReserve.click();
         return new PayAgreementPage();
     }
 
@@ -140,7 +141,7 @@ public class PersonalDataPage extends AbstractPage {
         personalDataPage.chooseDocType();
         personalDataPage.inputDocNumber(PASS_NUMBER);
         personalDataPage.chooseCountry();
-        personalDataPage.uncheckInsurance(check);
+        personalDataPage.uncheckInsurance(CHECK);
         return this;
     }
 

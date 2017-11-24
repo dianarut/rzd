@@ -10,8 +10,8 @@ public class PaymentPage extends AbstractPage {
     @FindBy(xpath = "//title[text()='TW Payment Gateway']")
     private List<WebElement> paypage;
 
-    public int isPayPage(){
-        return paypage.size();
+    public boolean isPayPage(){
+        return paypage.size()>0;
     }
 
 }

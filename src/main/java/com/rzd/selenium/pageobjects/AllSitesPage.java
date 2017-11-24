@@ -6,18 +6,18 @@ import org.openqa.selenium.support.FindBy;
 public class AllSitesPage extends AbstractPage {
 
     @FindBy(xpath = "(//a[text()='Инвесторам'])[2]")
-    private WebElement forInvestors;
+    private WebElement linkForInvestors;
 
     @FindBy(xpath = "//a[text()='Отдых и лечение']")
-    private WebElement restAndTreatment;
+    private WebElement linkRestAndTreatment;
 
     public RestAndTreatmentPage openRestAndTreatmentPage() {
-        restAndTreatment.click();
+        linkRestAndTreatment.click();
         return new RestAndTreatmentPage();
     }
 
     public ForInvestorsPage openInvestoramPage() {
-        forInvestors.click();
+        linkForInvestors.click();
         return new ForInvestorsPage();
     }
 }

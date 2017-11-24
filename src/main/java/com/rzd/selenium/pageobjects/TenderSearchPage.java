@@ -5,71 +5,70 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class TenderSearchPage extends AbstractPage {
 
-    private String today = TimeUtil.getCurrentCalendar();
+    private String today = TimeUtil.getCurrentDate(0);
 
-    @FindBy(xpath = "//select[@name=\"property_type_id\"]")
-    private WebElement objectType;
+    @FindBy(xpath = "//select[@name='property_type_id']")
+    private WebElement listObjectType;
 
-    @FindBy(xpath = "//select[@name=\"city_id\"]")
-    private WebElement place;
+    @FindBy(xpath = "//select[@name='city_id']")
+    private WebElement listOfPlace;
 
-    @FindBy(xpath = "//select[@name=\"status_type\"]")
-    private WebElement status;
+    @FindBy(xpath = "//select[@name='status_type']")
+    private WebElement listOfStatus;
 
-    @FindBy(xpath = "//input[@value=\"Найти\"]")
-    private WebElement searchButton;
+    @FindBy(xpath = "//input[@value='Найти']")
+    private WebElement buttonSearch;
 
     @FindBy(id = "DateStart")
-    private WebElement fromDate;
+    private WebElement fieldStartDate;
 
     @FindBy(id = "DateEnd")
-    private WebElement toDate;
+    private WebElement fieldEndDate;
 
-    @FindBy(xpath = "//a[@class=\"ui-state-default\"]")
-    private WebElement currentDay;
+    @FindBy(xpath = "//a[@class='ui-state-default']")
+    private WebElement fieldCurrentDay;
 
     @FindBy(xpath="//tr/td[text()='товары']")
-    private List<WebElement> goods;
+    private List<WebElement> listOfFieldsGoods;
 
     @FindBy(xpath = "//tr/td[text()='Москва']")
-    private List<WebElement> cities;
+    private List<WebElement> listOfFieldsCities;
 
-    @FindBy(xpath = "//*[@id=\"container\"]//table[@class=\"table\"]/tbody/tr/td[2]")
-    private List<WebElement> resultList;
+    @FindBy(xpath = "//*[@id='container']//table[@class='table']/tbody/tr/td[2]")
+    private List<WebElement> listOfResult;
 
 
     public TenderSearchPage fillTheSearch() {
-        Select selectObjectType = new Select(objectType);
+        Select selectObjectType = new Select(listObjectType);
         selectObjectType.selectByVisibleText("товары");
-        Select selectCity = new Select(place);
+        Select selectCity = new Select(listOfPlace);
         selectCity.selectByVisibleText("Москва");
-        fromDate.sendKeys(today);
-        toDate.sendKeys(today);
+        fieldStartDate.sendKeys(today);
+        fieldEndDate.sendKeys(today);
         return this;
     }
 
     public TenderSearchPage search() {
-        searchButton.click();
+        buttonSearch.click();
         return this;
     }
 
     public int goodsAmount(){
-        return goods.size();
+        return listOfFieldsGoods.size();
     }
 
     public int citiesAmount(){
-        return cities.size();
+        return listOfFieldsCities.size();
     }
 
 
     public boolean containsCorrectDate(){
         boolean res = false;
-        for (WebElement n: resultList) {
+        for (WebElement n: listOfResult) {
             if(n.getText().contains(today))
              res = true;
         }

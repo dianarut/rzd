@@ -3,7 +3,7 @@
 <suite name="suiteNadya">
     <test name="nadyaTest">
         <classes>
-            <class name="AllSitesTabTest"/>
+            <class name="AllSitesTabsAccessibilityTest"/>
             <class name="TenderTest"/>
         </classes>
     </test>

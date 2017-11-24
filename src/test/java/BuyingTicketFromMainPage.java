@@ -34,7 +34,7 @@ public class BuyingTicketFromMainPage{
         personalDataPage.fillTheForm();
         personalDataPage.chooseSeat();
         PayAgreementPage payAgreementPage = personalDataPage.reserveTicket();
-        Assert.assertTrue(payAgreementPage.isReservationMessage() > 0);
+        Assert.assertTrue(payAgreementPage.isReservationMessage());
     }
 
     @Test(dependsOnMethods = {"passengerDataInput"})
@@ -43,6 +43,6 @@ public class BuyingTicketFromMainPage{
         payAgreementPage.agreeWithTerms();
         payAgreementPage.goToPayment();
         PaymentPage paymentPage = new PaymentPage();
-        Assert.assertTrue(paymentPage.isPayPage() > 0);
+        Assert.assertTrue(paymentPage.isPayPage());
     }
 }

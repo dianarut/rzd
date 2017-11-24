@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class TenderTest {
 
-    private String downloadPath = ConfigurationManager.getProperty("tender.downloadPath");
+    private String dirWhereTodownload = ConfigurationManager.getProperty("tender.downloadPath");
 
     @Test
     public void plannedPurchaseTest() {
@@ -19,8 +19,8 @@ public class TenderTest {
         TenderPage tenderPage = mainPage.openTenderPage();
         TenderPlannedPurchasesPage tenderPlannedPurchasesPage = tenderPage.openPlannedpurchasePage();
         tenderPlannedPurchasesPage.downloadPurshasingPlan();
-        String filename = tenderPlannedPurchasesPage.docName();
-        Assert.assertTrue(Downloader.isFileDownloaded(downloadPath, filename));
+        String downloadedFileName = tenderPlannedPurchasesPage.docName();
+        Assert.assertTrue(Downloader.isFileDownloaded(dirWhereTodownload, downloadedFileName));
 
     }
 
