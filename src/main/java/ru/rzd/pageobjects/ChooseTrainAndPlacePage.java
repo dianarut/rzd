@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static ru.rzd.util.AssertManager.isContentOfVisibleElementContainsText;
+
 public class ChooseTrainAndPlacePage  extends AbstractPage {
 
     @FindBy (xpath =".//*[@class='col-xs-10'][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]")
@@ -58,11 +60,32 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
     private WebElement goToPassengersDateInputButton;
 
     @FindBy (xpath =".//*[@class='col-xs-12'][1][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
-    private  WebElement textFromStation;
+    private  WebElement nameFirstStationIn;
 
-    public  WebElement getTextFromStation()
-    {
-        return textFromStation;
+    @FindBy (xpath =".//*[@class='col-xs-12'][2][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
+    private  WebElement nameSecondStationIn;
+
+
+    @FindBy (xpath =".//*[@id='Page1']//*[@class='col-xs-12'][1][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
+    private  WebElement nameFirstStationOut;
+
+    @FindBy (xpath =".//*[@id='Page1']//*[@class='col-xs-12'][2][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
+    private  WebElement nameSecondStationOut;
+
+    public WebElement getNameFirstStationIn() {
+        return nameFirstStationIn;
+    }
+
+    public WebElement getNameSecondStationIn() {
+        return nameSecondStationIn;
+    }
+
+    public WebElement getNameFirstStationOut() {
+        return nameFirstStationOut;
+    }
+
+    public WebElement getNameSecondStationOut() {
+        return nameSecondStationOut;
     }
 
     public ChooseTrainAndPlacePage selectAnyTrainTo() {
@@ -113,13 +136,22 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
         return checkContent.isDisplayed();
     }
 
-    public ChooseTrainAndPlacePage selectTrainsAndCarriges(){
+    public ChooseTrainAndPlacePage selectTrainAndCarrigeIn(){
         selectAnyTrainTo();
         selectAnyCarrigeTo();
         clickChooseBackTrain();
-        selectAnyBackTrain();
-        selectAnyCarrigeBack();
         return this;
     }
 
+    public ChooseTrainAndPlacePage selectTrainAndCarrigeOut(){
+        selectAnyBackTrain();
+        selectAnyCarrigeBack();
+        this.goToPassengersDateInputButton();
+        return this;
+    }
+
+    public boolean checkStations(String from, String to , WebElement firstStation, WebElement SecondStation){
+        return isContentOfVisibleElementContainsText(from, firstStation)
+                & isContentOfVisibleElementContainsText(to, SecondStation);
+    }
 }

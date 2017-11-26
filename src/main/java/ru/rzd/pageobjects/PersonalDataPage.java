@@ -59,7 +59,11 @@ public class PersonalDataPage extends AbstractPage {
     private WebElement seatsFrom;
 
     @FindBy(xpath = ".//*[@class='rn-array'][count(.//*[child:: *[@id='Layer_1']])=2]")
-    private WebElement seatsForms;
+    private WebElement seatsForm;
+
+    public WebElement getSeatsForm() {
+        return seatsForm;
+    }
 
     public PersonalDataPage fillThePassengerDataForm() {
         fieldSurname.clear();
@@ -99,21 +103,11 @@ public class PersonalDataPage extends AbstractPage {
         return new PayAgreementPage();
     }
 
-    public PersonalDataPage chooseSeatTo() {
+    public PersonalDataPage fillTheFormChooseSeatsAndReserveTicket() {
+        this.fillThePassengerDataForm();
         seatsTo.click();
-        return this;
-    }
-
-    public PersonalDataPage chooseSeatFrom() {
         seatsFrom.click();
+        this.reserveTicket();
         return this;
-    }
-    public boolean checkSeatsLayout(){
-        try {
-            seatsForms.isDisplayed();
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 }

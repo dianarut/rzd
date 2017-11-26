@@ -1,4 +1,5 @@
 package ru.rzd.util;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
@@ -18,6 +19,27 @@ public class AssertManager {
                     res = true;
             }
         return res;
+    }
+
+    public static boolean isContentOfVisibleElementContainsText(String text, WebElement element) {
+        return element.getText().toLowerCase().contains(text.toLowerCase());
+    }
+
+    public static boolean isContentOfInvisibleElementContainsText(String text, WebElement element) {
+        return element.getAttribute("textContent").toLowerCase().contains(text.toLowerCase());
+    }
+
+    public static boolean isValueOfVisibleElementContainsText(String text, WebElement element) {
+        return element.getAttribute("value").toLowerCase().contains(text.toLowerCase());
+    }
+
+    public static boolean isElementDisplayed(WebElement element){
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }
 

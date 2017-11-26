@@ -17,20 +17,23 @@ public class BasicScheduleLDTrainsResultsPage   extends AbstractPage{
     @FindBy(id = "st_to")
     private WebElement toField;
 
+    public WebElement getSomeDate() {
+        return someDate;
+    }
+
+    public WebElement getInformationMessage() {
+        return informationMessage;
+    }
+    public WebElement getFromField() {
+        return fromField;
+    }
+
+    public WebElement getToField() {
+        return toField;
+    }
+
     public BasicScheduleLDTrainsResultsPage clickSomeDate(){
         someDate.click();
         return this;
-    }
-
-    public String getFrom(){
-        return fromField.getAttribute("value");
-    }
-
-    public String getTo(){
-        return toField.getAttribute("value");
-    }
-
-    public boolean checkInformationMessage() {
-        return informationMessage.isDisplayed();
     }
 }

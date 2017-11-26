@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import ru.rzd.util.TimeUtil;
 
+import static ru.rzd.util.AssertManager.isContentOfInvisibleElementContainsText;
+
 public class MainPage extends AbstractPage {
 
     @FindBy(xpath = "//a[@href=\"https://www.rzd.ru/main/secure/ru\"]")
@@ -63,11 +65,19 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = ".//*[@class='greyBlock'][child:: *[@id='ticketbuyforma_horizontal']]")
     private WebElement passengersForm;
 
-    @FindBy(xpath = ".//*[@class='station'][1]")
-    private WebElement textFromStation;
+    @FindBy(xpath = ".//*[@class='dropList'][1]/*[@class='station'][1]")
+    private WebElement nameFromStation;
 
     @FindBy(xpath = ".//*[@class='dropList'][2]/*[@class='station'][1]")
-    private WebElement textToStation;
+    private WebElement nameToStation;
+
+    public WebElement getNameFromStation() {
+        return nameFromStation;
+    }
+
+    public WebElement getNameToStation() {
+        return nameToStation;
+    }
 
     public MainPageEng goToEngVersion() {
         englishFlagButton.click();
@@ -122,7 +132,6 @@ public class MainPage extends AbstractPage {
         justClick();
         setDateField(TimeUtil.getCurrentDatePlusAmountOfDays(plusDaysToCurrentDate));
         justClick();
-        clickSearchButton();
         return this;
     }
 
@@ -140,6 +149,7 @@ public class MainPage extends AbstractPage {
     }
 
     public MainPage clickPassengersButton() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersButton));
         passengersButton.click();
         return this;
     }
@@ -159,20 +169,8 @@ public class MainPage extends AbstractPage {
         return new ActivityPage();
     }
 
-//    public boolean checkPassengersFrom(){
-//        try {
-//            super.webDriverWait().until(ExpectedConditions.elementToBeClickable(passengersForm));
-//            return true;
-//        } catch (TimeoutException e) {
-//            return false;
-//        }
-//    }
-
-    public String checkFromStations() {
-        return textFromStation.getAttribute("textContent");
-    }
-
-    public String checkToStations() {
-        return textToStation.getAttribute("textContent");
+    public boolean checkStations(String from, String to , WebElement firstStation, WebElement secondStation){
+        return isContentOfInvisibleElementContainsText(to, firstStation)
+            & isContentOfInvisibleElementContainsText(from, secondStation);
     }
 }

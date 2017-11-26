@@ -43,10 +43,10 @@ public class AllSitesTabsAccessibilityTest {
         Assert.assertTrue(AssertManager.isElementPresent(gamesPage.getGamesPageAtribute()), "Games page failed");
     }
 
-    @AfterClass
-    public void afterCLass(){
-        BrowserFactory.getInstance().getDriver().quit();
-    }
+//    @AfterClass
+//    public void afterCLass(){
+//        BrowserFactory.getInstance().getDriver().quit();
+//    }
 
 
 }
