@@ -3,28 +3,22 @@ package ru.rzd.pageobjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 import static ru.rzd.util.AssertManager.isContentOfVisibleElementContainsText;
 
 public class ChooseTrainAndPlacePage  extends AbstractPage {
 
     @FindBy (xpath =".//*[@class='col-xs-10'][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]")
-    private WebElement anyTrainTo;
+    private WebElement buttonFristAvailableTrainIn;
 
     @FindBy (xpath =".//*[@class='col-xs-10'][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]][ancestor :: *[@id='Page1']]")
-    private WebElement anyTrainBack;
+    private WebElement buttonFristAvailableTrainOut;
 
-    @FindBy (xpath =".//*[@type = 'radio']")
-    private WebElement anyСarriageTo;
+    @FindBy (css =".col-xs-4>input")
+    private WebElement radiobuttonFirsСarriageIn;
 
     @FindBy (xpath =".//*[@type = 'radio'][ancestor :: *[@id='Page1']]")
-    private WebElement anyСarriageBack;
-
-    @FindBy (xpath =".//*[@class='col-xs-10'][ancestor :: *[@class ='route-carType-item']][ancestor :: *[@id='Page1']]")
-    private WebElement anyBackTrain;
+    private WebElement radiobuttonFirsСarriageOut;
 
     @FindBy (xpath =".//button[@class='btn btn-main-red j-toggle-filter-sidebar']")
     private WebElement changeButton;
@@ -53,18 +47,14 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
     @FindBy (xpath =".//div[text()='Время для станций на территории РФ:']")
     private WebElement textContent;
 
-    @FindBy (xpath =".//*[text()='Выбрать поезд обратно']")
-    private WebElement chooseBackTrain;
-
-    @FindBy (xpath =".//*[text()='Перейти к вводу данных пассажира и выбору мест']")
-    private WebElement goToPassengersDateInputButton;
+    @FindBy (css =".j-car-ok.btn.btn-default")
+    private WebElement buttonChooseBackTrain;
 
     @FindBy (xpath =".//*[@class='col-xs-12'][1][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
     private  WebElement nameFirstStationIn;
 
     @FindBy (xpath =".//*[@class='col-xs-12'][2][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
     private  WebElement nameSecondStationIn;
-
 
     @FindBy (xpath =".//*[@id='Page1']//*[@class='col-xs-12'][1][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
     private  WebElement nameFirstStationOut;
@@ -88,35 +78,35 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
         return nameSecondStationOut;
     }
 
-    public ChooseTrainAndPlacePage selectAnyTrainTo() {
-        anyTrainTo.click();
+    private ChooseTrainAndPlacePage selectAnyTrainTo() {
+        buttonFristAvailableTrainIn.click();
         return this;
     }
 
-    public ChooseTrainAndPlacePage selectAnyCarrigeTo() {
-        anyСarriageTo.click();
+    private ChooseTrainAndPlacePage selectAnyCarrigeTo() {
+        radiobuttonFirsСarriageIn.click();
         return this;
     }
 
-    public ChooseTrainAndPlacePage selectAnyCarrigeBack() {
-        anyСarriageBack.click();
+    private ChooseTrainAndPlacePage selectAnyCarrigeBack() {
+        radiobuttonFirsСarriageOut.click();
         return this;
     }
 
-    public ChooseTrainAndPlacePage clickChooseBackTrain() {
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(chooseBackTrain));
-        chooseBackTrain.click();
+    private ChooseTrainAndPlacePage clickChooseBackTrain() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonChooseBackTrain));
+        buttonChooseBackTrain.click();
         return this;
     }
 
-    public ChooseTrainAndPlacePage selectAnyBackTrain() {
-        anyTrainBack.click();
+    private ChooseTrainAndPlacePage selectAnyBackTrain() {
+        buttonFristAvailableTrainOut.click();
         return this;
     }
 
-    public ChooseTrainAndPlacePage goToPassengersDateInputButton() {
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(goToPassengersDateInputButton));
-        goToPassengersDateInputButton.click();
+    private ChooseTrainAndPlacePage goToPassengersDateInputButton() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(moveButton));
+        moveButton.click();
         return this;
     }
 

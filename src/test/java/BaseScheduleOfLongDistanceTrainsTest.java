@@ -1,3 +1,4 @@
+import org.openqa.selenium.WebDriver;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.BasicScheduleLDTrainsResultsPage;
 import ru.rzd.pageobjects.BasicSchedulePage;
@@ -9,7 +10,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static ru.rzd.util.AssertManager.*;
-import static ru.rzd.util.AssertManager.isValueOfVisibleElementContainsText;
 
 public class BaseScheduleOfLongDistanceTrainsTest{
     private static final String FROM = ConfigurationManager.getProperty("movement.base.from");
@@ -17,11 +17,12 @@ public class BaseScheduleOfLongDistanceTrainsTest{
 
     @BeforeClass
     public void init2() {
-        BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
+        WebDriver driver = BrowserFactory.getInstance().getDriver();
+        driver.get(ConfigurationManager.getProperty("driver.start"));
     }
 
     @Test
-    public void baseScheduleLDTrainsTest_MainPage() {
+    public void getBaseScheduleOfLongDistanceTrains() {
         MainPage mainPage = new MainPage();
         mainPage.clickPassengersButton();
         PassengerMainPage passengerMainPage = new PassengerMainPage();

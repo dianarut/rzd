@@ -1,13 +1,11 @@
 package ru.rzd.pageobjects;
 
-import ru.rzd.util.ConfigurationManager;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import ru.rzd.util.ConfigurationManager;
 
 import java.util.List;
-
 
 public class PersonalDataPage extends AbstractPage {
 
@@ -53,16 +51,16 @@ public class PersonalDataPage extends AbstractPage {
     private WebElement buttonReserve;
 
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo']")
-    private WebElement seatsTo;
+    private WebElement buttonSeatsIn;
 
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo'][preceding:: *[@class='col-xs-24 t-dblvert-pad j-scheme-box']]")
-    private WebElement seatsFrom;
+    private WebElement buttonSeatsOut;
 
     @FindBy(xpath = ".//*[@class='rn-array'][count(.//*[child:: *[@id='Layer_1']])=2]")
-    private WebElement seatsForm;
+    private WebElement formSeats;
 
     public WebElement getSeatsForm() {
-        return seatsForm;
+        return formSeats;
     }
 
     public PersonalDataPage fillThePassengerDataForm() {
@@ -105,8 +103,8 @@ public class PersonalDataPage extends AbstractPage {
 
     public PersonalDataPage fillTheFormChooseSeatsAndReserveTicket() {
         this.fillThePassengerDataForm();
-        seatsTo.click();
-        seatsFrom.click();
+        buttonSeatsIn.click();
+        buttonSeatsOut.click();
         this.reserveTicket();
         return this;
     }

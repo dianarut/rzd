@@ -1,5 +1,4 @@
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeTest;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.ChooseTrainAndPlacePage;
 import ru.rzd.pageobjects.MainPage;
@@ -13,14 +12,14 @@ import org.testng.annotations.Test;
 import static ru.rzd.util.AssertManager.isElementDisplayed;
 
 public class BuyingTicketSeeScheduleTest{
-    private static final String DRIVER_START = ConfigurationManager.getProperty("driver.start");
     private static final String FROM = ConfigurationManager.getProperty("movement.base.from");
     private static final String TO = ConfigurationManager.getProperty("movement.base.to");
     private static final int PLUS_DAYS_TO_CURRENT_DATE= Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
 
     @BeforeClass
     public void init2() {
-        BrowserFactory.getInstance().getDriver().get(ConfigurationManager.getProperty("driver.start"));
+        WebDriver driver = BrowserFactory.getInstance().getDriver();
+        driver.get(ConfigurationManager.getProperty("driver.start"));
     }
 
     @Test
