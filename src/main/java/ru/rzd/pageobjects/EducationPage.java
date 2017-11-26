@@ -13,16 +13,16 @@ public class EducationPage extends AbstractPage{
     private WebElement searchButton;
 
     @FindBy(xpath = ".//div[@class='college_itemContent']")
-    private List<WebElement> list;
+    private List<WebElement> resultList;
 
     @FindBy(xpath = ".//input[@class='textInput']")
-    private WebElement name;
+    private WebElement nameInput;
 
     @FindBy(xpath = ".//select[@name='trade_id']")
-    private WebElement specialization;
+    private WebElement specializationInput;
 
     @FindBy(xpath = ".//select[@name='city_id']")
-    private WebElement city;
+    private WebElement cityInput;
 
     private static final String EDUCATION_NAME = ConfigurationManager.getProperty("education.name");
     private static final String EDUCATION_SPECIALIZATION = ConfigurationManager.getProperty("education.specialization");
@@ -30,14 +30,14 @@ public class EducationPage extends AbstractPage{
 
     public int pressButton(){
         searchButton.click();
-        return list.size();
+        return resultList.size();
     }
 
     public void fillForm(){
-        name.sendKeys(EDUCATION_NAME);
-        Select dropdownSpec = new Select(specialization);
+        nameInput.sendKeys(EDUCATION_NAME);
+        Select dropdownSpec = new Select(specializationInput);
         dropdownSpec.selectByVisibleText(EDUCATION_SPECIALIZATION);
-        Select dropdownCity = new Select(city);
+        Select dropdownCity = new Select(cityInput);
         dropdownCity.selectByVisibleText(EDUCATION_CITY);
     }
 }

@@ -7,7 +7,6 @@ import ru.rzd.util.ConfigurationManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class ActualMovementTest {
 
