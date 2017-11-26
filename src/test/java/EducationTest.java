@@ -16,19 +16,19 @@ public class EducationTest {
     }
 
     @Test
-    public void educationEmptyTest() {
+    public void noFillingFormTest() {
         MainPage mainPage = new MainPage();
         EducationPage educationPage = mainPage.attendEducationPage();
         int res = educationPage.pressButton();
         Assert.assertTrue(res > 0);
     }
 
-    @Test(dependsOnMethods = {"educationEmptyTest"})
-    public void educationFullTest() {
-        EducationPage educationPage = new EducationPage();
+    @Test()
+    public void fillNameSpecializationCityTest() {
+        MainPage mainPage = new MainPage();
+        EducationPage educationPage = mainPage.attendEducationPage();
         educationPage.fillForm();
         int res = educationPage.pressButton();
         Assert.assertTrue(res > 0);
     }
-
 }

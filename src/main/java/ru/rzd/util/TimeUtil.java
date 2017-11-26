@@ -31,4 +31,9 @@ public class TimeUtil {
         return date;
     }
 
+    public static int getDayBeforeCurrentDate(){
+        calendar = Calendar.getInstance();
+        return calendar.get(calendar.DAY_OF_MONTH) - 1;
+    }
+
 }
