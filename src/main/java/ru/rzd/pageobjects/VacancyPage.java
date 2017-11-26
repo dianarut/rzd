@@ -14,16 +14,16 @@ public class VacancyPage extends AbstractPage{
     private WebElement resultTable;
 
     @FindBy(xpath = ".//input[@name='name']")
-    private WebElement vacancy;
+    private WebElement vacancyInput;
 
     @FindBy(xpath = ".//input[@name='org_unit_name']")
-    private WebElement department;
+    private WebElement departmentInput;
 
     @FindBy(xpath = ".//select[@name='region_id']")
-    private WebElement region;
+    private WebElement regionInput;
 
     @FindBy(xpath = ".//input[@name='salary']")
-    private WebElement salary;
+    private WebElement salaryInput;
 
     @FindBy(xpath = ".//input[@class='padR10']")
     private WebElement formButton;
@@ -38,11 +38,11 @@ public class VacancyPage extends AbstractPage{
     }
 
     public boolean fillForm(){
-        vacancy.sendKeys(VACANCY_POSITION);
-        department.sendKeys("");
-        Select select = new Select(region);
+        vacancyInput.sendKeys(VACANCY_POSITION);
+        departmentInput.sendKeys("");
+        Select select = new Select(regionInput);
         select.selectByVisibleText(VACANCY_REGION);
-        salary.sendKeys(VACANCY_SALARY);
+        salaryInput.sendKeys(VACANCY_SALARY);
         formButton.click();
         return resultTable.isDisplayed();
     }
