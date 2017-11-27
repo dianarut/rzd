@@ -10,7 +10,7 @@ import static ru.rzd.util.AssertManager.isContentOfInvisibleElementContainsText;
 
 public class MainPage extends AbstractPage {
 
-    @FindBy(xpath = "//a[@href=\"https://www.rzd.ru/main/secure/ru\"]")
+    @FindBy(xpath = "//a[@href='https://www.rzd.ru/main/secure/ru']")
     private WebElement loginButton;
 
     @FindBy(id = "name0")
@@ -28,7 +28,7 @@ public class MainPage extends AbstractPage {
     @FindBy(id = "marquee")
     private WebElement areaForClick;
 
-    @FindBy(xpath = "//a[@href=\"http://tender.rzd.ru/\"]")
+    @FindBy(xpath = "//a[@href='http://tender.rzd.ru/']")
     private WebElement tenderButton;
 
     @FindBy(css = "#headLinks > a.headLinks-link.headLinks-link-allSites.orng")
@@ -40,13 +40,13 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = "//a[@href='http://social.rzd.ru/']")
     private WebElement vacancyLink;
 
-    @FindBy(xpath = "//a[@href=\"http://pass.rzd.ru/\"]")
-    private WebElement buttonPassengers;
+    @FindBy(xpath = "//a[@href='http://pass.rzd.ru/']")
+    private WebElement passengersButton;
 
     @FindBy(xpath = "//*[contains(text(), 'Итоги')]")
     private WebElement workResults;
 
-    @FindBy(xpath = "//img[@class=\"mlang_icon\"]")
+    @FindBy(xpath = "//img[@class='mlang_icon']")
     private WebElement englishFlagButton;
 
     @FindBy(xpath = ".//*[@class='dropList'][1]/*[@class='station'][1]")

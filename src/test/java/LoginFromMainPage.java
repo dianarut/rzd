@@ -1,6 +1,6 @@
-import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.LoginPage;
 import ru.rzd.pageobjects.MainPage;
+import ru.rzd.util.AssertManager;
 import ru.rzd.util.ConfigurationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -8,13 +8,10 @@ import org.testng.annotations.Test;
 
 public class LoginFromMainPage {
 
-    private String userName = ConfigurationManager.getProperty("user.login");
+    private String loginName = ConfigurationManager.getProperty("user.login");
     private String password = ConfigurationManager.getProperty("user.password");
-    private String mainPageURL = ConfigurationManager.getProperty("page.main.url");
-    private String loginPageURL = ConfigurationManager.getProperty("page.login.url");
     private MainPage mainPage;
     private LoginPage loginPage;
-
 
     @BeforeTest
     public void initializer() {
@@ -23,20 +20,9 @@ public class LoginFromMainPage {
     }
 
     @Test
-    public void mainPage() {
-        String expectedTitle = mainPageURL;
-        String actualTitle = BrowserFactory.getInstance().getDriver().getCurrentUrl();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        mainPage.goToLoginPage();
-    }
-
-    @Test(priority = 2, dependsOnMethods = "mainPage")
     public void loginPage() {
-        String expectedTitle = loginPageURL;
-        String actualTitle = BrowserFactory.getInstance().getDriver().getCurrentUrl();
-        Assert.assertTrue(actualTitle.contains(expectedTitle));
-        loginPage.nameField(userName);
-        loginPage.passwordField(password);
-        loginPage.submitButton();
+        mainPage.goToLoginPage();
+        Assert.assertTrue(AssertManager.isElementPresent(loginPage.getButtonForgotPassword()));
+        loginPage.oneCanLoginToWebsite(loginName, password);
     }
 }

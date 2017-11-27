@@ -16,17 +16,16 @@ public class VacancyTest {
     }
 
     @Test
-    public void vacancyEmptyTest() {
+    public void noFillingFormTest() {
         MainPage mainPage = new MainPage();
         VacancyPage vacancyPage = mainPage.attendVacancyPage();
-        boolean res = vacancyPage.pressButton();
-        Assert.assertTrue(res);
+        Assert.assertTrue(vacancyPage.pressButton());
     }
 
     @Test
     public void vacancyFullTest() {
-        VacancyPage vacancyPage = new VacancyPage();
-        boolean res = vacancyPage.fillForm();
-        Assert.assertTrue(res);
+        MainPage mainPage = new MainPage();
+        VacancyPage vacancyPage = mainPage.attendVacancyPage();
+        Assert.assertTrue(vacancyPage.fillForm());
     }
 }

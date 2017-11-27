@@ -2,11 +2,14 @@ package ru.rzd.pageobjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class PassengerMainPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@id=\"Form_tabs\"]/td[2]/div")
+    @FindBy(xpath = "//*[@id='Form_tabs']/td[2]/div")
     private WebElement suburbanTrainsTab;
 
     @FindBy(id = "tab3")
@@ -32,6 +35,10 @@ public class PassengerMainPage extends AbstractPage {
 
     @FindBy (xpath =".//*[@class='box-form__datetime__arrow-right j-date-arrow j-right'][following-sibling :: *[@id='date1']]")
     private WebElement buttonPlusToDateOut;
+
+    @FindBy(how = How.XPATH, using = "//h1")
+    private List<WebElement> pageh1Text;
+
 
     public SuburbanTrainMainPage clickOnSuburbanTrainsTab() {
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(suburbanTrainsTab));
@@ -78,17 +85,22 @@ public class PassengerMainPage extends AbstractPage {
         return this;
     }
 
-    public ActualMovementPage attendActualMovementPage(){
+    public ActualMovementPage attendActualMovementPage() {
         actualMovementTab.click();
         return new ActualMovementPage();
     }
 
-    public PassengerMainPage fillForm(String from, String to, int days){
+    public PassengerMainPage fillForm(String from, String to, int days) {
         setFromField(from);
         setToField(to);
         clickBackCheckBox();
         plusDaysToDates(days);
         clickScheduleButton();
         return this;
+    }
+
+    public List<WebElement> getPageh1Text() {
+        waitForElementVisible(pageh1Text.get(0), 2);
+        return pageh1Text;
     }
 }
