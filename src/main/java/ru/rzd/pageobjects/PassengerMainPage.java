@@ -39,7 +39,6 @@ public class PassengerMainPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = "//h1")
     private List<WebElement> pageh1Text;
 
-
     public SuburbanTrainMainPage clickOnSuburbanTrainsTab() {
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(suburbanTrainsTab));
         suburbanTrainsTab.click();
