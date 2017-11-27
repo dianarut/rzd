@@ -6,31 +6,34 @@ import org.openqa.selenium.support.FindBy;
 public class BasicScheduleLDTrainsResultsPage   extends AbstractPage{
 
     @FindBy(xpath = "//*[@class = 'basicSched_trainsMark']")
-    private WebElement someDate;
+    private WebElement buttonAvailableDate;
 
     @FindBy(id = "basicSched_simplemodal-container")
-    private WebElement informationMessage;
+    private WebElement messegeInformationAboutRouts;
 
     @FindBy(id = "st_from")
-    private WebElement fromField;
+    private WebElement fieldFrom;
 
     @FindBy(id = "st_to")
-    private WebElement toField;
+    private WebElement fieldTo;
+
+    public WebElement getSomeDate() {
+        return buttonAvailableDate;
+    }
+
+    public WebElement getInformationMessage() {
+        return messegeInformationAboutRouts;
+    }
+    public WebElement getFromField() {
+        return fieldFrom;
+    }
+
+    public WebElement getToField() {
+        return fieldTo;
+    }
 
     public BasicScheduleLDTrainsResultsPage clickSomeDate(){
-        someDate.click();
+        buttonAvailableDate.click();
         return this;
-    }
-
-    public String getFrom(){
-        return fromField.getAttribute("value");
-    }
-
-    public String getTo(){
-        return toField.getAttribute("value");
-    }
-
-    public boolean checkInformationMessage() {
-        return informationMessage.isDisplayed();
     }
 }

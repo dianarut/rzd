@@ -1,11 +1,12 @@
 package ru.rzd.pageobjects;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import ru.rzd.util.TimeUtil;
+
+import static ru.rzd.util.AssertManager.isContentOfInvisibleElementContainsText;
 
 public class MainPage extends AbstractPage {
 
@@ -13,31 +14,19 @@ public class MainPage extends AbstractPage {
     private WebElement loginButton;
 
     @FindBy(id = "name0")
-    private WebElement fromField;
+    private WebElement fieldFrom;
 
     @FindBy(id = "name1")
-    private WebElement toField;
+    private WebElement fieldTo;
 
     @FindBy(xpath = ".//*[@id='date0'][ancestor ::*[@id='new_ticket_form']]")
-    private WebElement dateField;
-
-    @FindBy(xpath = ".//*[count(*[@class = 'calen-cont'])=1]")
-    private WebElement dateField2;
-
-    @FindBy(id = "buttonDate")
-    private WebElement calendarIcon;
-
-    @FindBy(xpath = " .//*[count(*[@class = 'dropList'][child :: *[@class = 'station']])=1]")
-    private WebElement dropdownList;
-
-    @FindBy(xpath = " .//*[count(*[@class = 'dropList'][child :: *[@class = 'station']])=2]")
-    private WebElement dropdownLists;
+    private WebElement fieldDate;
 
     @FindBy(xpath = ".//*[@id='Submit'][not(contains(@class, 'disabled'))]")
-    private WebElement searchButton;
+    private WebElement ButtonSearch;
 
     @FindBy(id = "marquee")
-    private WebElement justForClick;
+    private WebElement areaForClick;
 
     @FindBy(xpath = "//a[@href='http://tender.rzd.ru/']")
     private WebElement tenderButton;
@@ -60,14 +49,19 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = "//img[@class='mlang_icon']")
     private WebElement englishFlagButton;
 
-    @FindBy(xpath = ".//*[@class='greyBlock'][child:: *[@id='ticketbuyforma_horizontal']]")
-    private WebElement passengersForm;
-
-    @FindBy(xpath = ".//*[@class='station'][1]")
-    private WebElement textFromStation;
+    @FindBy(xpath = ".//*[@class='dropList'][1]/*[@class='station'][1]")
+    private WebElement nameFromStation;
 
     @FindBy(xpath = ".//*[@class='dropList'][2]/*[@class='station'][1]")
-    private WebElement textToStation;
+    private WebElement nameToStation;
+
+    public WebElement getNameFromStation() {
+        return nameFromStation;
+    }
+
+    public WebElement getNameToStation() {
+        return nameToStation;
+    }
 
     public MainPageEng goToEngVersion() {
         englishFlagButton.click();
@@ -99,58 +93,52 @@ public class MainPage extends AbstractPage {
         return new VacancyPage();
     }
 
-    public MainPage fillFromField(String from) {
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(fromField));
-        fromField.click();
-        fromField.clear();
-        fromField.sendKeys(from);
+    private MainPage fillFromField(String from) {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(fieldFrom));
+        fieldFrom.click();
+        fieldFrom.clear();
+        fieldFrom.sendKeys(from);
         return this;
     }
 
-    public MainPage fillToField(String to) {
-        super.webDriverWait().until(ExpectedConditions.visibilityOf(dropdownList));
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(toField));
-        toField.clear();
-        toField.sendKeys(to);
+    private MainPage fillToField(String to) {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(fieldTo));
+        fieldTo.clear();
+        fieldTo.sendKeys(to);
         return this;
     }
 
     public MainPage fillForPassengersForm(String to, String from, int plusDaysToCurrentDate){
         fillFromField(from);
-        justClick();
+        clickToHideDropDownList();
         fillToField(to);
-        justClick();
+        clickToHideDropDownList();
         setDateField(TimeUtil.getCurrentDatePlusAmountOfDays(plusDaysToCurrentDate));
-        justClick();
-        clickSearchButton();
+        clickToHideDropDownList();
         return this;
     }
 
-    //This click is designed to hide drop-down list.
-    public MainPage justClick() {
-        justForClick.click();
+    private MainPage clickToHideDropDownList() {
+        areaForClick.click();
         return this;
     }
 
     public MainPage clickSearchButton(){
-        super.webDriverWait().until(ExpectedConditions.visibilityOf(dropdownLists));
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(searchButton));
-        searchButton.click();
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(ButtonSearch));
+        ButtonSearch.click();
         return this;
     }
 
     public MainPage clickPassengersButton() {
-        passengersButton.click();
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonPassengers));
+        buttonPassengers.click();
         return this;
     }
 
-    public MainPage setDateField(String date) {
-        super.webDriverWait().until(ExpectedConditions.visibilityOf(dropdownLists));
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(calendarIcon));
-        super.webDriverWait().until(ExpectedConditions.visibilityOf(dateField2));
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(dateField));
-        dateField.clear();
-        dateField.sendKeys(date);
+    private MainPage setDateField(String date) {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(fieldDate));
+        fieldDate.clear();
+        fieldDate.sendKeys(date);
         return this;
     }
 
@@ -159,11 +147,8 @@ public class MainPage extends AbstractPage {
         return new ActivityPage();
     }
 
-    public String checkFromStations() {
-        return textFromStation.getAttribute("textContent");
-    }
-
-    public String checkToStations() {
-        return textToStation.getAttribute("textContent");
+    public boolean checkStations(String from, String to , WebElement firstStation, WebElement secondStation){
+        return isContentOfInvisibleElementContainsText(to, firstStation)
+            & isContentOfInvisibleElementContainsText(from, secondStation);
     }
 }
