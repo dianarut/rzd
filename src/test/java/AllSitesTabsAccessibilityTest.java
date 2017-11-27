@@ -42,15 +42,5 @@ public class AllSitesTabsAccessibilityTest {
         GamesPage gamesPage = activityPage.clickLinklinkToGamesPage();
         Assert.assertTrue(AssertManager.isElementPresent(gamesPage.getGamesPageAtribute()), "Games page failed");
     }
-<<<<<<< HEAD
-//
-=======
-
->>>>>>> test_master
-//    @AfterClass
-//    public void afterCLass(){
-//        BrowserFactory.getInstance().getDriver().quit();
-//    }
-
 
 }
