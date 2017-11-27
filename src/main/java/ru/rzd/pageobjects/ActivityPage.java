@@ -12,7 +12,6 @@ public class ActivityPage extends AbstractPage {
     private WebElement linkTo2011report;
 
     public ActivityPage clickLinkTo2011report() {
-        tabSwitcher();
         linkTo2011report.click();
         return this;
     }

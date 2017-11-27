@@ -1,5 +1,7 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.interactions.Actions;
+import ru.rzd.factory.BrowserFactory;
 import ru.rzd.util.ConfigurationManager;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -62,8 +64,9 @@ public class PersonalDataPage extends AbstractPage {
     private WebElement seatsForms;
 
     public PersonalDataPage fillThePassengerDataForm() {
-        fieldSurname.clear();
-        fieldSurname.sendKeys(LAST_NAME);
+        new Actions(BrowserFactory.getInstance().getDriver()).sendKeys(fieldSurname, LAST_NAME).build().perform();
+//        fieldSurname.clear();
+//        fieldSurname.sendKeys(LAST_NAME);
         fieldName.clear();
         fieldName.sendKeys(FIRST_NAME);
         fieldMidname.clear();

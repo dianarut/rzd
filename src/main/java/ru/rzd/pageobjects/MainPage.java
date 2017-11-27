@@ -156,6 +156,7 @@ public class MainPage extends AbstractPage {
 
     public ActivityPage openActivityPage(){
         workResults.click();
+        tabSwitcher();
         return new ActivityPage();
     }
 
