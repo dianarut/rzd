@@ -22,18 +22,6 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = ".//*[@id='date0'][ancestor ::*[@id='new_ticket_form']]")
     private WebElement fieldDate;
 
-//    @FindBy(xpath = ".//*[count(*[@class = 'calen-cont'])=1]")
-//    private WebElement dateField2;
-//
-//    @FindBy(id = "buttonDate")
-//    private WebElement calendarIcon;
-//
-//    @FindBy(xpath = " .//*[count(*[@class = 'dropList'][child :: *[@class = 'station']])=1]")
-//    private WebElement dropdownList;
-//
-//    @FindBy(xpath = " .//*[count(*[@class = 'dropList'][child :: *[@class = 'station']])=2]")
-//    private WebElement dropdownLists;
-
     @FindBy(xpath = ".//*[@id='Submit'][not(contains(@class, 'disabled'))]")
     private WebElement ButtonSearch;
 
@@ -114,7 +102,6 @@ public class MainPage extends AbstractPage {
     }
 
     private MainPage fillToField(String to) {
-        //super.webDriverWait().until(ExpectedConditions.visibilityOf(dropdownList));
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(fieldTo));
         fieldTo.clear();
         fieldTo.sendKeys(to);
@@ -137,7 +124,6 @@ public class MainPage extends AbstractPage {
     }
 
     public MainPage clickSearchButton(){
-        //super.webDriverWait().until(ExpectedConditions.visibilityOf(dropdownLists));
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(ButtonSearch));
         ButtonSearch.click();
         return this;
@@ -150,9 +136,6 @@ public class MainPage extends AbstractPage {
     }
 
     private MainPage setDateField(String date) {
-        //super.webDriverWait().until(ExpectedConditions.visibilityOf(dropdownLists));
-        //super.webDriverWait().until(ExpectedConditions.elementToBeClickable(calendarIcon));
-        //super.webDriverWait().until(ExpectedConditions.visibilityOf(dateField2));
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(fieldDate));
         fieldDate.clear();
         fieldDate.sendKeys(date);
