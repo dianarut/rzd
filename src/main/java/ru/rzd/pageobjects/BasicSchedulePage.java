@@ -6,38 +6,38 @@ import org.openqa.selenium.support.FindBy;
 public class BasicSchedulePage extends AbstractPage {
 
     @FindBy(id = "st_from")
-    private WebElement fromField;
+    private WebElement fieldFrom;
 
     @FindBy(id = "st_to")
-    private WebElement toField;
+    private WebElement fieldTo;
 
     @FindBy(xpath = ".//button[text() = 'Расписание'][ancestor :: *[@id ='tab3_Output']]")
-    private WebElement scheduleButton;
+    private WebElement buttonSchedule;
 
-    public BasicSchedulePage clickFromField(){
-        fromField.click();
+    private BasicSchedulePage clickFromField(){
+        fieldFrom.click();
         return this;
     }
 
-    public BasicSchedulePage clickToField(){
-        toField.click();
+    private BasicSchedulePage clickToField(){
+        fieldTo.click();
         return this;
     }
 
-    public BasicSchedulePage setFromField(String from) {
-        fromField.clear();
-        fromField.sendKeys(from);
+    private BasicSchedulePage setFromField(String from) {
+        fieldFrom.clear();
+        fieldFrom.sendKeys(from);
         return this;
     }
 
-    public BasicSchedulePage setToField(String to) {
-        toField.clear();
-        toField.sendKeys(to);
+    private BasicSchedulePage setToField(String to) {
+        fieldTo.clear();
+        fieldTo.sendKeys(to);
         return this;
     }
 
-    public BasicSchedulePage clickScheduleButton(){
-        scheduleButton.click();
+    private BasicSchedulePage clickScheduleButton(){
+        buttonSchedule.click();
         return this;
     }
 

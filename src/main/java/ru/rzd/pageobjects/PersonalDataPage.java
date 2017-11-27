@@ -1,15 +1,18 @@
 package ru.rzd.pageobjects;
 
+<<<<<<< HEAD
 import org.openqa.selenium.interactions.Actions;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.util.ConfigurationManager;
 import org.openqa.selenium.NoSuchElementException;
+=======
+>>>>>>> test_master
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import ru.rzd.util.ConfigurationManager;
 
 import java.util.List;
-
 
 public class PersonalDataPage extends AbstractPage {
 
@@ -55,13 +58,17 @@ public class PersonalDataPage extends AbstractPage {
     private WebElement buttonReserve;
 
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo']")
-    private WebElement seatsTo;
+    private WebElement buttonSeatsIn;
 
     @FindBy(xpath = ".//*[@class='s-cell s-type-up' or @class='s-cell s-type-lo'][preceding:: *[@class='col-xs-24 t-dblvert-pad j-scheme-box']]")
-    private WebElement seatsFrom;
+    private WebElement buttonSeatsOut;
 
     @FindBy(xpath = ".//*[@class='rn-array'][count(.//*[child:: *[@id='Layer_1']])=2]")
-    private WebElement seatsForms;
+    private WebElement formSeats;
+
+    public WebElement getSeatsForm() {
+        return formSeats;
+    }
 
     public PersonalDataPage fillThePassengerDataForm() {
         new Actions(BrowserFactory.getInstance().getDriver()).sendKeys(fieldSurname, LAST_NAME).build().perform();
@@ -102,21 +109,11 @@ public class PersonalDataPage extends AbstractPage {
         return new PayAgreementPage();
     }
 
-    public PersonalDataPage chooseSeatTo() {
-        seatsTo.click();
+    public PersonalDataPage fillTheFormChooseSeatsAndReserveTicket() {
+        this.fillThePassengerDataForm();
+        buttonSeatsIn.click();
+        buttonSeatsOut.click();
+        this.reserveTicket();
         return this;
-    }
-
-    public PersonalDataPage chooseSeatFrom() {
-        seatsFrom.click();
-        return this;
-    }
-    public boolean checkSeatsLayout(){
-        try {
-            seatsForms.isDisplayed();
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 }

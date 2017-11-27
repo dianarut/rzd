@@ -1,24 +1,20 @@
-import ru.rzd.factory.BrowserFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import ru.rzd.pageobjects.*;
 import ru.rzd.util.AssertManager;
 import ru.rzd.util.ConfigurationManager;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class BuyingTicketFromMainPage{
 
-    private String from = ConfigurationManager.getProperty("movement.base.from");
-    private String to = ConfigurationManager.getProperty("movement.base.to");
-    private int plusDaysToCurrentDate = Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
-    private String loginPageTitle = ConfigurationManager.getProperty("page.login.title");
-
+    private static final String FROM = ConfigurationManager.getProperty("movement.base.from");
+    private static final String TO = ConfigurationManager.getProperty("movement.base.to");
+    private static final int PLUS_DAYS_TO_CURRENT_DATE = Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
 
     @Test
     public void fillForPassengersForm() {
         MainPage mainPage = new MainPage();
-        mainPage.fillForPassengersForm(to, from, plusDaysToCurrentDate);
-        Assert.assertEquals(mainPage.checkFromStations(), from);
-        Assert.assertEquals(mainPage.checkToStations(), to);
+        mainPage.fillForPassengersForm(FROM, TO, PLUS_DAYS_TO_CURRENT_DATE);
+        Assert.assertTrue(mainPage.checkStations(FROM, TO, mainPage.getNameFromStation(),mainPage.getNameToStation()));
         mainPage.clickSearchButton();
     }
 
