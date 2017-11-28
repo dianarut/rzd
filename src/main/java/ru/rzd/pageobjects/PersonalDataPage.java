@@ -67,8 +67,6 @@ public class PersonalDataPage extends AbstractPage {
 
     public PersonalDataPage fillThePassengerDataForm() {
         new Actions(BrowserFactory.getInstance().getDriver()).sendKeys(fieldSurname, LAST_NAME).build().perform();
-//        fieldSurname.clear();
-//        fieldSurname.sendKeys(LAST_NAME);
         fieldName.clear();
         fieldName.sendKeys(FIRST_NAME);
         fieldMidname.clear();
