@@ -1,5 +1,6 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import ru.rzd.factory.BrowserFactory;
@@ -33,8 +34,15 @@ public class VacancyPage extends AbstractPage{
     private static final String VACANCY_POSITION = ConfigurationManager.getProperty("vacancy.position");
     private static final String VACANCY_REGION = ConfigurationManager.getProperty("vacancy.region");
     private static final String VACANCY_SALARY = ConfigurationManager.getProperty("vacancy.salary");
+    private String jsHighlightStyle = "arguments[0].style.border='6px solid red'";
+
+    @Override
+    protected void highlightElement(WebElement element){
+        ((JavascriptExecutor) driver).executeScript(jsHighlightStyle, element);
+    }
 
     public boolean pressButton(){
+        highlightElement(searchButton);
         fillFormAction.moveToElement(searchButton).click().build().perform();
         return resultTable.isDisplayed();
     }

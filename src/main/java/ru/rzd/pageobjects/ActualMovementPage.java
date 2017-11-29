@@ -1,5 +1,6 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.util.ConfigurationManager;
@@ -39,8 +40,15 @@ public class ActualMovementPage extends AbstractPage{
     private static final String MOVEMENT_FROM = ConfigurationManager.getProperty("movement.from");
     private static final String MOVEMENT_NUMBER = ConfigurationManager.getProperty("movement.number");
     private static final int DAY = TimeUtil.getDayBeforeCurrentDate();
+    private String jsHighlightStyle = "arguments[0].style.border='6px solid red'";
+
+    @Override
+    protected void highlightElement(WebElement element){
+        ((JavascriptExecutor) driver).executeScript(jsHighlightStyle, element);
+    }
 
     private boolean pressButton(){
+        highlightElement(submitButton);
         fillFormAction.moveToElement(submitButton).click().build().perform();
         return resultList.isEmpty();
     }
