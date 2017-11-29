@@ -19,8 +19,7 @@ public class EducationTest {
     public void noFillingFormTest() {
         MainPage mainPage = new MainPage();
         EducationPage educationPage = mainPage.attendEducationPage();
-        int res = educationPage.pressButton();
-        Assert.assertTrue(res > 0);
+        Assert.assertFalse(educationPage.pressButton());
     }
 
     @Test()
@@ -28,7 +27,6 @@ public class EducationTest {
         MainPage mainPage = new MainPage();
         EducationPage educationPage = mainPage.attendEducationPage();
         educationPage.fillForm();
-        int res = educationPage.pressButton();
-        Assert.assertTrue(res > 0);
+        Assert.assertFalse(educationPage.pressButton());
     }
 }

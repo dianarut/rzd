@@ -1,5 +1,6 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.interactions.Actions;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.util.ConfigurationManager;
 import ru.rzd.util.TimeUtil;
@@ -31,6 +32,7 @@ public class ActualMovementPage extends AbstractPage{
     private WebElement trainNumberInput;
 
     private WebDriver driver = BrowserFactory.getInstance().getDriver();
+    private Actions fillFormAction = new Actions(driver);
     private static final String MOVEMENT_TO = ConfigurationManager.getProperty("movement.to");
     private static final String MOVEMENT_BASE_TO = ConfigurationManager.getProperty("movement.base.to");
     private static final String MOVEMENT_BASE_FROM = ConfigurationManager.getProperty("movement.base.from");
@@ -39,26 +41,32 @@ public class ActualMovementPage extends AbstractPage{
     private static final int DAY = TimeUtil.getDayBeforeCurrentDate();
 
     private boolean pressButton(){
-        submitButton.click();
+        fillFormAction.moveToElement(submitButton).click().build().perform();
         return resultList.isEmpty();
     }
 
     public boolean fillArrive(){
-        arriveStationInput.sendKeys(MOVEMENT_BASE_TO);
-        driver.findElement(By.xpath(".//div[@class='station' and text()='" + MOVEMENT_TO + "']")).click();
+        fillFormAction.moveToElement(arriveStationInput).click()
+                .sendKeys(MOVEMENT_BASE_TO).build().perform();
+        WebElement arriveDropdown = driver.findElement(By.xpath(".//div[@class='station' and text()='" + MOVEMENT_TO + "']"));
+        fillFormAction.moveToElement(arriveDropdown).click().build().perform();
         return pressButton();
     }
 
     public boolean fillDeparture(){
-        departureStationInput.sendKeys(MOVEMENT_BASE_FROM);
-        driver.findElement(By.xpath(".//div[@class='station' and text()='" + MOVEMENT_FROM + "']")).click();
-        departureCalendar.click();
-        driver.findElement(By.xpath(".//span[@class='select-time days45 near-time' and text()=" + DAY + "]")).click();
+        fillFormAction.moveToElement(departureStationInput).click()
+                .sendKeys(MOVEMENT_BASE_FROM).build().perform();
+        WebElement departureDropdown = driver.findElement(By.xpath(".//div[@class='station' and text()='" + MOVEMENT_FROM + "']"));
+        fillFormAction.moveToElement(departureDropdown).click()
+                .moveToElement(departureCalendar).click().build().perform();
+        WebElement dayCalendar = driver.findElement(By.xpath(".//span[@class='select-time days45 near-time' and text()=" + DAY + "]"));
+        fillFormAction.moveToElement(dayCalendar).click().build().perform();
         return pressButton();
     }
 
     public boolean fillTrainNumber(){
-        trainNumberInput.sendKeys(MOVEMENT_NUMBER);
+        fillFormAction.moveToElement(trainNumberInput).click()
+                .sendKeys(MOVEMENT_NUMBER).build().perform();
         return pressButton();
     }
 }
