@@ -1,5 +1,7 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import ru.rzd.factory.BrowserFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,14 @@ public class AbstractPage {
     public String getTitleFromDriver() {
         String title = driver.getTitle();
         return title;
+    }
+
+    protected void highlightElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", element);
+    }
+
+    protected void clickElementWithJavaScript(WebElement element){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
     }
 
     public void tabSwitcher() {

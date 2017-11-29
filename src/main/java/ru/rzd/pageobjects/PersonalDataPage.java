@@ -1,9 +1,11 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.interactions.Actions;
+import ru.rzd.factory.BrowserFactory;
+import ru.rzd.util.ConfigurationManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import ru.rzd.util.ConfigurationManager;
 
 import java.util.List;
 
@@ -64,8 +66,7 @@ public class PersonalDataPage extends AbstractPage {
     }
 
     public PersonalDataPage fillThePassengerDataForm() {
-        fieldSurname.clear();
-        fieldSurname.sendKeys(LAST_NAME);
+        new Actions(BrowserFactory.getInstance().getDriver()).sendKeys(fieldSurname, LAST_NAME).build().perform();
         fieldName.clear();
         fieldName.sendKeys(FIRST_NAME);
         fieldMidname.clear();
