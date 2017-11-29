@@ -15,6 +15,7 @@ public class TenderPlannedPurchasesPage extends AbstractPage {
 
     public TenderPlannedPurchasesPage downloadPurshasingPlan(){
         waitForElementVisible(filePurchaisePlan2017, 3);
+        highlightElement(filePurchaisePlan2017);
         new Actions(BrowserFactory.getInstance().getDriver()).moveToElement(filePurchaisePlan2017).click(filePurchaisePlan2017).build().perform();
         return this;
     }
