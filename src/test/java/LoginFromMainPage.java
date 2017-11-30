@@ -1,3 +1,4 @@
+import ru.rzd.business_objects.User;
 import ru.rzd.pageobjects.LoginPage;
 import ru.rzd.pageobjects.MainPage;
 import ru.rzd.util.AssertManager;
@@ -8,8 +9,6 @@ import org.testng.annotations.Test;
 
 public class LoginFromMainPage {
 
-    private String loginName = ConfigurationManager.getProperty("user.login");
-    private String password = ConfigurationManager.getProperty("user.password");
     private MainPage mainPage;
     private LoginPage loginPage;
 
@@ -23,6 +22,6 @@ public class LoginFromMainPage {
     public void loginPage() {
         mainPage.goToLoginPage();
         Assert.assertTrue(AssertManager.isElementPresent(loginPage.getButtonForgotPassword()));
-        loginPage.oneCanLoginToWebsite(loginName, password);
+        loginPage.oneCanLoginToWebsite(new User());
     }
 }
