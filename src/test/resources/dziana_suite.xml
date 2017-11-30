@@ -3,8 +3,8 @@
 <suite name="suiteDziana">
     <test name="dzianaTest">
         <classes>
+            <class name="LoginFromMainPage"/>
             <class name="BaseScheduleOfLongDistanceTrainsTest"/>
-            <class name="BuyingTicketSeeScheduleTest"/>
         </classes>
     </test>
 </suite>
