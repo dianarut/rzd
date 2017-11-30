@@ -33,7 +33,8 @@ public class BasicScheduleLDTrainsResultsPage   extends AbstractPage{
     }
 
     public BasicScheduleLDTrainsResultsPage clickSomeDate(){
-        buttonAvailableDate.click();
+        highlightElement(buttonAvailableDate);
+        clickElementWithJavaScript(buttonAvailableDate);
         return this;
     }
 }

@@ -1,7 +1,10 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import ru.rzd.factory.BrowserFactory;
 
 public class BasicSchedulePage extends AbstractPage {
 
@@ -14,25 +17,17 @@ public class BasicSchedulePage extends AbstractPage {
     @FindBy(xpath = ".//button[text() = 'Расписание'][ancestor :: *[@id ='tab3_Output']]")
     private WebElement buttonSchedule;
 
-    private BasicSchedulePage clickFromField(){
-        fieldFrom.click();
+    private BasicSchedulePage setField(WebElement element, String field) {
+        element.click();
+        element.clear();
+        element.sendKeys(field);
+        new Actions(BrowserFactory.getInstance().getDriver()).sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).build().perform();
         return this;
     }
 
-    private BasicSchedulePage clickToField(){
-        fieldTo.click();
-        return this;
-    }
-
-    private BasicSchedulePage setFromField(String from) {
-        fieldFrom.clear();
-        fieldFrom.sendKeys(from);
-        return this;
-    }
-
-    private BasicSchedulePage setToField(String to) {
-        fieldTo.clear();
-        fieldTo.sendKeys(to);
+    private BasicSchedulePage setFields(String from, String to) {
+        this.setField(fieldFrom, from);
+        this.setField(fieldTo, to);
         return this;
     }
 
@@ -42,10 +37,7 @@ public class BasicSchedulePage extends AbstractPage {
     }
 
     public BasicSchedulePage fillForm(String from, String to){
-        clickFromField();
-        setFromField(from);
-        clickToField();
-        setToField(to);
+        setFields(from,to);
         clickScheduleButton();
         return this;
     }

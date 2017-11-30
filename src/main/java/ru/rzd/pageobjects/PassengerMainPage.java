@@ -39,6 +39,9 @@ public class PassengerMainPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = "//h1")
     private List<WebElement> pageh1Text;
 
+    @FindBy(xpath = ".//*[text()='МОСКВА БЕЛОРУССКАЯ']")
+    private WebElement nameStationInDropdownList;
+
     public SuburbanTrainMainPage clickOnSuburbanTrainsTab() {
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(suburbanTrainsTab));
         suburbanTrainsTab.click();
@@ -55,17 +58,16 @@ public class PassengerMainPage extends AbstractPage {
         return this;
     }
 
-    private PassengerMainPage setFromField(String from) {
-        fieldFrom.click();
-        fieldFrom.clear();
-        fieldFrom.sendKeys(from);
+    private PassengerMainPage setField(WebElement field, String station) {
+        field.click();
+        field.clear();
+        field.sendKeys(station);
         return this;
     }
 
-    private PassengerMainPage setToField(String to) {
-        fieldTo.click();
-        fieldTo.clear();
-        fieldTo.sendKeys(to);
+    private PassengerMainPage setFromAndToFields(String from, String to) {
+        this.setField(fieldFrom, from);
+        this.setField(fieldTo, to);
         return this;
     }
 
@@ -90,8 +92,7 @@ public class PassengerMainPage extends AbstractPage {
     }
 
     public PassengerMainPage fillForm(String from, String to, int days) {
-        setFromField(from);
-        setToField(to);
+        this.setFromAndToFields(from, to);
         clickBackCheckBox();
         plusDaysToDates(days);
         clickScheduleButton();
