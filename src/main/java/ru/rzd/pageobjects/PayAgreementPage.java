@@ -1,6 +1,7 @@
 package ru.rzd.pageobjects;
 
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -29,7 +30,7 @@ public class PayAgreementPage extends AbstractPage {
 
     public PayAgreementPage checkAgreeWithTermsBox() {
         super.waitForElementEnabled(agreeButton, 2);
-        agreeButton.click();
+        clickElementWithJavaScript(agreeButton);
         return this;
     }
 }

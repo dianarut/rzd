@@ -57,8 +57,8 @@ public class BrowserFactory {
             case "Chrome":
                 driver = drivers.get("Chrome");
                 if (driver == null) {
-//                    System.setProperty(ConfigurationManager.getProperty("driver.chrome"), ConfigurationManager.getProperty("driver.chrome.path"));
-//                    driver = new ChromeDriver();
+                    //System.setProperty(ConfigurationManager.getProperty("driver.chrome"), ConfigurationManager.getProperty("driver.chrome.path"));
+                    //driver = new ChromeDriver();
                     try{
                         driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.chrome());
                     } catch(MalformedURLException e){

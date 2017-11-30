@@ -58,7 +58,9 @@ public class TenderSearchPage extends AbstractPage {
         selectObjectType.selectByVisibleText("товары");
         Select selectCity = new Select(place);
         selectCity.selectByVisibleText("Москва");
+        highlightElement(fromDate);
         fromDate.sendKeys(today);
+        highlightElement(toDate);
         toDate.sendKeys(today);
         return this;
     }
