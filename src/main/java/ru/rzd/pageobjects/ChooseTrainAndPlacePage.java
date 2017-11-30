@@ -1,8 +1,10 @@
 package ru.rzd.pageobjects;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ru.rzd.factory.BrowserFactory;
 
 import static ru.rzd.util.AssertManager.isContentOfVisibleElementContainsText;
 
@@ -61,6 +63,9 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
 
     @FindBy (xpath =".//*[@id='Page1']//*[@class='col-xs-12'][2][ancestor :: *[@class='route-item__purpose__direct'][descendant :: *[@class='route-tr-addinfo'][count(*[@class = 'route-tr-elreg-msg'])=0]]]/*")
     private  WebElement nameSecondStationOut;
+
+    @FindBy (xpath =".//*[@class='jqui_tooltip circle-text offset-left-md']")
+    private  WebElement iconQuection;
 
     public WebElement getNameFirstStationIn() {
         return nameFirstStationIn;
@@ -128,6 +133,7 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
 
     public ChooseTrainAndPlacePage selectTrainAndCarrigeIn(){
         selectAnyTrainTo();
+        moveToIconQuestion();
         selectAnyCarrigeTo();
         clickChooseBackTrain();
         return this;
@@ -135,6 +141,7 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
 
     public ChooseTrainAndPlacePage selectTrainAndCarrigeOut(){
         selectAnyBackTrain();
+        moveToIconQuestion();
         selectAnyCarrigeBack();
         this.goToPassengersDateInputButton();
         return this;
@@ -143,5 +150,10 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
     public boolean checkStations(String from, String to , WebElement firstStation, WebElement SecondStation){
         return isContentOfVisibleElementContainsText(from, firstStation)
                 & isContentOfVisibleElementContainsText(to, SecondStation);
+    }
+
+    public ChooseTrainAndPlacePage moveToIconQuestion() {
+        new Actions(BrowserFactory.getInstance().getDriver()).moveToElement(iconQuection).build().perform();
+        return this;
     }
 }

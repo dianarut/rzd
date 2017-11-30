@@ -1,11 +1,12 @@
 package ru.rzd.pageobjects;
 
-import ru.rzd.factory.BrowserFactory;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.rzd.factory.BrowserFactory;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,14 @@ public class AbstractPage {
     public String getTitleFromDriver() {
         String title = driver.getTitle();
         return title;
+    }
+
+    protected void highlightElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", element);
+    }
+
+    protected void clickElementWithJavaScript(WebElement element){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
     }
 
     public void tabSwitcher() {
