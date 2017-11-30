@@ -3,7 +3,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.util.List;
 
 public class SuburbanTrainConfirmationPage extends AbstractPage {
@@ -19,7 +18,9 @@ public class SuburbanTrainConfirmationPage extends AbstractPage {
 
     public SuburbanTrainConfirmationPage oneAgreeToTermOfUse() {
         super.webDriverWait().until(ExpectedConditions.elementToBeClickable(iAgreeCheckbox));
+        highlightElement(iAgreeCheckbox);
         iAgreeCheckbox.click();
+        highlightElement(submitButton);
         submitButton.click();
         return this;
     }

@@ -5,7 +5,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.rzd.factory.BrowserFactory;
 
-import javax.swing.*;
 
 
 public class TenderPlannedPurchasesPage extends AbstractPage {

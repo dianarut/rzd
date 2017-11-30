@@ -7,7 +7,7 @@ public class TimeUtil {
 
     private static Calendar calendar;
     private static String date;
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("d.MM.yyyy");
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private static Date dateNow;
 
     public static Calendar getCalendar() {

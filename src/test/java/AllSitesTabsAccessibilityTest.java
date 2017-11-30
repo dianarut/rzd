@@ -1,4 +1,3 @@
-import org.testng.annotations.AfterClass;
 import ru.rzd.factory.BrowserFactory;
 import ru.rzd.pageobjects.*;
 import ru.rzd.util.AssertManager;

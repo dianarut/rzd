@@ -42,7 +42,7 @@ public class BuyingTicketForSuburbanTrain_RU {
         passengerMainPage.clickOnSuburbanTrainsTab();
     }
 
-    @Test(description = "Filling all fields with correct data")
+    @Test(description = "Filling all fields with correct data", priority = 1)
     public void inputCorrectData() {
         mainPage.clickPassengersButton();
         passengerMainPage.clickOnSuburbanTrainsTab();
@@ -50,7 +50,7 @@ public class BuyingTicketForSuburbanTrain_RU {
         suburbanTrainMainPage.fillAllFields(surname, initials, passportNumber);
     }
 
-    @Test(description = "Clicking checkbox and going to paymentPage")
+    @Test(description = "Clicking checkbox and going to paymentPage", priority = 2)
     public void checkboxAndSubmit() {
         mainPage.clickPassengersButton();
         passengerMainPage.clickOnSuburbanTrainsTab();

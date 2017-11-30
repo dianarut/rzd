@@ -1,13 +1,18 @@
 package ru.rzd.pageobjects;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ru.rzd.factory.BrowserFactory;
 
 import java.util.List;
 
 public class PassengerMainPage extends AbstractPage {
+
+    private WebDriver driver = BrowserFactory.getInstance().getDriver();
 
     @FindBy(xpath = "//*[@id='Form_tabs']/td[2]/div")
     private WebElement suburbanTrainsTab;
@@ -43,8 +48,8 @@ public class PassengerMainPage extends AbstractPage {
     private WebElement nameStationInDropdownList;
 
     public SuburbanTrainMainPage clickOnSuburbanTrainsTab() {
-        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(suburbanTrainsTab));
-        suburbanTrainsTab.click();
+        webDriverWait().until(ExpectedConditions.elementToBeClickable(suburbanTrainsTab));
+        new Actions(driver).click(suburbanTrainsTab).build().perform();
         return new SuburbanTrainMainPage();
     }
 
