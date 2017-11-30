@@ -2,6 +2,7 @@ package ru.rzd.pageobjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class BasicScheduleLDTrainsResultsPage   extends AbstractPage{
 
@@ -33,6 +34,7 @@ public class BasicScheduleLDTrainsResultsPage   extends AbstractPage{
     }
 
     public BasicScheduleLDTrainsResultsPage clickSomeDate(){
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonAvailableDate));
         highlightElement(buttonAvailableDate);
         clickElementWithJavaScript(buttonAvailableDate);
         return this;

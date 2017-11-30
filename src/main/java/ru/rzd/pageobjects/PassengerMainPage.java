@@ -49,16 +49,19 @@ public class PassengerMainPage extends AbstractPage {
     }
 
     private PassengerMainPage clickBackCheckBox() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(checkboxBack));
         checkboxBack.click();
         return this;
     }
 
     private PassengerMainPage clickScheduleButton() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonSchedule));
         buttonSchedule.click();
         return this;
     }
 
     private PassengerMainPage setField(WebElement field, String station) {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(field));
         field.click();
         field.clear();
         field.sendKeys(station);
@@ -72,12 +75,15 @@ public class PassengerMainPage extends AbstractPage {
     }
 
     public PassengerMainPage clickBasicScheduleTab() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(tabBasicSchedule));
         tabBasicSchedule.click();
         return this;
     }
 
     private PassengerMainPage plusDaysToDates(int days) {
         int n = 0;
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonPlusToDateIn));
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonPlusToDateOut));
         while (days>n){
             buttonPlusToDateIn.click();
             buttonPlusToDateOut.click();

@@ -4,6 +4,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.rzd.factory.BrowserFactory;
 
 public class BasicSchedulePage extends AbstractPage {
@@ -18,6 +19,7 @@ public class BasicSchedulePage extends AbstractPage {
     private WebElement buttonSchedule;
 
     private BasicSchedulePage setField(WebElement element, String field) {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(element));
         element.click();
         element.clear();
         element.sendKeys(field);
@@ -32,6 +34,7 @@ public class BasicSchedulePage extends AbstractPage {
     }
 
     private BasicSchedulePage clickScheduleButton(){
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonSchedule));
         buttonSchedule.click();
         return this;
     }

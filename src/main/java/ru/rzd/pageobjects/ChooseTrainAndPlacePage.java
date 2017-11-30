@@ -84,16 +84,19 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
     }
 
     private ChooseTrainAndPlacePage selectAnyTrainTo() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonFristAvailableTrainIn));
         buttonFristAvailableTrainIn.click();
         return this;
     }
 
     private ChooseTrainAndPlacePage selectAnyCarrigeTo() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(radiobuttonFirsСarriageIn));
         radiobuttonFirsСarriageIn.click();
         return this;
     }
 
     private ChooseTrainAndPlacePage selectAnyCarrigeBack() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(radiobuttonFirsСarriageOut));
         radiobuttonFirsСarriageOut.click();
         return this;
     }
@@ -105,6 +108,7 @@ public class ChooseTrainAndPlacePage  extends AbstractPage {
     }
 
     private ChooseTrainAndPlacePage selectAnyBackTrain() {
+        super.webDriverWait().until(ExpectedConditions.elementToBeClickable(buttonFristAvailableTrainOut));
         buttonFristAvailableTrainOut.click();
         return this;
     }
