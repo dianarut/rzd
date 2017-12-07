@@ -44,27 +44,27 @@ public class BrowserFactory {
             case "Firefox":
                 driver = drivers.get("Firefox");
                 if (driver == null) {
-                    //System.setProperty(ConfigurationManager.getProperty("driver.geckodriver"), ConfigurationManager.getProperty("driver.firefox.path"));
-                    //driver = new FirefoxDriver();
-                    try{
-                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.firefox());
-                    } catch(MalformedURLException e){
-                        e.printStackTrace();
-                    }
-                    drivers.put("Firefox", driver);
+                    System.setProperty(ConfigurationManager.getProperty("driver.geckodriver"), ConfigurationManager.getProperty("driver.firefox.path"));
+                    driver = new FirefoxDriver();
+//                    try{
+//                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.firefox());
+//                    } catch(MalformedURLException e){
+//                        e.printStackTrace();
+//                    }
+//                    drivers.put("Firefox", driver);
                 }
                 break;
             case "Chrome":
                 driver = drivers.get("Chrome");
                 if (driver == null) {
-                    //System.setProperty(ConfigurationManager.getProperty("driver.chrome"), ConfigurationManager.getProperty("driver.chrome.path"));
-                    //driver = new ChromeDriver();
-                    try{
-                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.chrome());
-                    } catch(MalformedURLException e){
-                        e.printStackTrace();
-                    }
-                    drivers.put("Chrome", driver);
+                    System.setProperty(ConfigurationManager.getProperty("driver.chrome"), ConfigurationManager.getProperty("driver.chrome.path"));
+                    driver = new ChromeDriver();
+//                    try{
+//                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.chrome());
+//                    } catch(MalformedURLException e){
+//                        e.printStackTrace();
+//                    }
+//                    drivers.put("Chrome", driver);
                 }
                 break;
         }
