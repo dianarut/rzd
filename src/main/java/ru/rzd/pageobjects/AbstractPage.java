@@ -20,7 +20,7 @@ public class AbstractPage {
     }
 
     public WebDriverWait webDriverWait() {
-        WebDriverWait waiter = new WebDriverWait(driver, 10);
+        WebDriverWait waiter = new WebDriverWait(driver, 15);
         return waiter;
     }
 

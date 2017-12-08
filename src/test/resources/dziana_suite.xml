@@ -4,7 +4,7 @@
     <test name="dzianaTest">
         <classes>
             <class name="LoginFromMainPage"/>
-            <class name="BaseScheduleOfLongDistanceTrainsTest"/>
+            <class name="steps.BaseScheduleOfLongDistanceTrainsTest"/>
         </classes>
     </test>
 </suite>
