@@ -26,19 +26,19 @@ public class BaseScheduleOfLongDistanceTrainsTest{
         driver.get(ConfigurationManager.getProperty("driver.start"));
     }
 
-    @Given("^the user is on Passengers Main Page$")
+    @Given("^the user is on Passengers? Main Page$")
     public void getPassengersMainPage() {
         MainPage mainPage = new MainPage();
         mainPage.clickPassengersButton();
     }
 
-    @When("^he go to Base Schedule Of Long Distance Trains Page$")
+    @When("^he go to Base Schedule? Of Long Distance Trains? Page$")
     public void getPassengerMainPage() {
         PassengerMainPage passengerMainPage = new PassengerMainPage();
         passengerMainPage.clickBasicScheduleTab();
     }
 
-    @And("^he fill out the form with (.+) and (.+)$")
+    @And("^he fill out the form? with (.+) and (.+)$")
     public void fillOutTheForm(String from, String to) {
         BasicSchedulePage basicSchedulePage = new BasicSchedulePage();
         basicSchedulePage.fillForm(from, to);
@@ -49,7 +49,7 @@ public class BaseScheduleOfLongDistanceTrainsTest{
         BasicScheduleLDTrainsResultsPage basicScheduleLDTrainsResultsPage = new BasicScheduleLDTrainsResultsPage();
         basicScheduleLDTrainsResultsPage.clickSomeDate();
     }
-    @Then("^ensure an information message about trip$")
+    @Then("^ensure an information message about trip?$")
     public void ensureAnInformationMessage() {
         BasicScheduleLDTrainsResultsPage basicScheduleLDTrainsResultsPage = new BasicScheduleLDTrainsResultsPage();
         Assert.assertTrue(isElementDisplayed(basicScheduleLDTrainsResultsPage.getInformationMessage()), "The information message about route is not found!");
