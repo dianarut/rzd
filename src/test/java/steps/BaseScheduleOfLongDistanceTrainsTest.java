@@ -15,7 +15,7 @@ import ru.rzd.pageobjects.PassengerMainPage;
 import ru.rzd.util.ConfigurationManager;
 
 import static ru.rzd.util.AssertManager.isElementDisplayed;
-
+//
 public class BaseScheduleOfLongDistanceTrainsTest{
     private static final String FROM = ConfigurationManager.getProperty("movement.base.from");
     private static final String TO = ConfigurationManager.getProperty("movement.base.to");
