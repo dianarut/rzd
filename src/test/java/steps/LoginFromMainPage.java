@@ -1,25 +1,19 @@
+package steps;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import ru.rzd.business_objects.User;
 import ru.rzd.pageobjects.LoginPage;
 import ru.rzd.pageobjects.MainPage;
 import ru.rzd.util.AssertManager;
-import ru.rzd.util.ConfigurationManager;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 public class LoginFromMainPage {
 
-    private MainPage mainPage;
-    private LoginPage loginPage;
-
-    @BeforeTest
-    public void initializer() {
-        mainPage = new MainPage();
-        loginPage = new LoginPage();
-    }
-
     @Test
-    public void loginPage() {
+    public static void loginPage() {
+        MainPage mainPage = new MainPage();
+        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage();
         mainPage.goToLoginPage();
         Assert.assertTrue(AssertManager.isElementPresent(loginPage.getButtonForgotPassword()));
         loginPage.oneCanLoginToWebsite(new User());

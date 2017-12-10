@@ -3,7 +3,7 @@
 <suite name="suiteDziana">
     <test name="dzianaTest">
         <classes>
-            <class name="LoginFromMainPage"/>
+            <class name="steps.LoginFromMainPage"/>
             <class name="steps.BaseScheduleOfLongDistanceTrainsTest"/>
         </classes>
     </test>

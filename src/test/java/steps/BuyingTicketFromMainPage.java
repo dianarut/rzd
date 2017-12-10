@@ -1,3 +1,5 @@
+package steps;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.rzd.pageobjects.*;

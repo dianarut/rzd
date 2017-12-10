@@ -15,19 +15,15 @@ import ru.rzd.pageobjects.PassengerMainPage;
 import ru.rzd.util.ConfigurationManager;
 
 import static ru.rzd.util.AssertManager.isElementDisplayed;
-//
+
 public class BaseScheduleOfLongDistanceTrainsTest{
     private static final String FROM = ConfigurationManager.getProperty("movement.base.from");
     private static final String TO = ConfigurationManager.getProperty("movement.base.to");
 
-    @BeforeClass
-    public void init2() {
+    @Given("^the user is on Passengers Main Page$")
+    public void getPassengersMainPage() {
         WebDriver driver = BrowserFactory.getInstance().getDriver();
         driver.get(ConfigurationManager.getProperty("driver.start"));
-    }
-
-    @Given("^the user is on Passengers? Main Page$")
-    public void getPassengersMainPage() {
         MainPage mainPage = new MainPage();
         mainPage.clickPassengersButton();
     }

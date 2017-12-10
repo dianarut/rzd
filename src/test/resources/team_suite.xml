@@ -3,8 +3,8 @@
 <suite name="teamSuite">
     <test name="buyingTicketFromMainPage">
         <classes>
-            <class name="LoginFromMainPage"/>
-            <class name="BuyingTicketFromMainPage"/>
+            <class name="steps.LoginFromMainPage"/>
+            <class name="steps.BuyingTicketFromMainPage"/>
         </classes>
     </test>
 </suite>

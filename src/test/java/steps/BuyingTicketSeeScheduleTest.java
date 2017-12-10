@@ -1,13 +1,16 @@
-import org.openqa.selenium.WebDriver;
-import ru.rzd.factory.BrowserFactory;
+package steps;
+
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.testng.Assert;
 import ru.rzd.pageobjects.ChooseTrainAndPlacePage;
-import ru.rzd.pageobjects.MainPage;
 import ru.rzd.pageobjects.PassengerMainPage;
 import ru.rzd.pageobjects.PersonalDataPage;
 import ru.rzd.util.ConfigurationManager;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static ru.rzd.util.AssertManager.isElementDisplayed;
 
@@ -16,32 +19,32 @@ public class BuyingTicketSeeScheduleTest{
     private static final String TO = ConfigurationManager.getProperty("movement.base.to");
     private static final int PLUS_DAYS_TO_CURRENT_DATE= Integer.parseInt(ConfigurationManager.getProperty("movement.plusDaysToCurrentDate"));
 
-    @BeforeClass
-    public void init2() {
-        WebDriver driver = BrowserFactory.getInstance().getDriver();
-        driver.get(ConfigurationManager.getProperty("driver.start"));
+    @When("^he fill the form with dates?$")
+    public void fillForm(DataTable dates) {
+        List<List<String>> data = dates.raw();
+        PassengerMainPage passengerMainPage = new PassengerMainPage();
+        passengerMainPage.fillForm(data.get(0).get(0), data.get(0).get(1), Integer.parseInt(data.get(0).get(2)));
     }
 
-    @Test
-    public void chooseTrainCarrigeInAndOut() {
-        MainPage mainPage = new MainPage();
-        mainPage.clickPassengersButton();
-        PassengerMainPage passengerMainPage = new PassengerMainPage();
-        passengerMainPage.fillForm(FROM, TO, PLUS_DAYS_TO_CURRENT_DATE);
+    @And("^he choose train? and place? in and out$")
+    public void chooseTrainCarrigeInAndOut(){
         ChooseTrainAndPlacePage chooseTrainAndPlacePage = new ChooseTrainAndPlacePage();
-        Assert.assertTrue(chooseTrainAndPlacePage.checkStations(FROM, TO, chooseTrainAndPlacePage.getNameFirstStationIn(),chooseTrainAndPlacePage.getNameSecondStationIn()),"The places of departure and destination are wrong!");
         chooseTrainAndPlacePage.selectTrainAndCarrigeIn();
-        Assert.assertTrue(chooseTrainAndPlacePage.checkStations(TO, FROM, chooseTrainAndPlacePage.getNameFirstStationOut(), chooseTrainAndPlacePage.getNameSecondStationOut()),"The places of departure and destination on the way back are wrong!");
         chooseTrainAndPlacePage.selectTrainAndCarrigeOut();
     }
 
-    @Test(dependsOnMethods = "chooseTrainCarrigeInAndOut")
-    public void chooseSeatsInAndOutAndReserveTickets(){
+    @And("^he input personal date$")
+    public void inputPersonalDate() {
         PersonalDataPage personalDataPage = new PersonalDataPage();
         //This test can fail because sometimes seats are displayed incorrect
         Assert.assertTrue(isElementDisplayed(personalDataPage.getSeatsForm()), "There are no seats!");
         personalDataPage.fillTheFormChooseSeatsAndReserveTicket();
+    }
+
+    @Then("^he get agreement page?$")
+    public void getAgreementPage() {
         BuyingTicketFromMainPage buyingTicketFromMainPage = new BuyingTicketFromMainPage();
         buyingTicketFromMainPage.agreementPage();
     }
 }
+

@@ -43,7 +43,7 @@ rzd_project/target/test-classes/testng.xml
 rzd_project/target/test-classes/TenderTest.class
 rzd_project/target/test-classes/SampleTest.class
 rzd_project/target/test-classes/EducationTest.class
-rzd_project/target/test-classes/BuyingTicketFromMainPage.class
+rzd_project/target/test-classes/steps.BuyingTicketFromMainPage.class
 rzd_project/target/test-classes/AllSitesTabsAccessibilityTest.class
 rzd_project/target/classes/test
 rzd_project/target/classes/drivers/geckodriverwin.exe
@@ -78,6 +78,6 @@ rzd_project/target/test-classes/suite2.xml
 rzd_project/target/test-classes/particular_suite.xml
 rzd_project/target/test-classes/VacancyTest.class
 rzd_project/target/test-classes/PassengerDataInputTest.class
-rzd_project/target/test-classes/BuyingTicketSeeScheduleTest.class
+rzd_project/target/test-classes/steps.BuyingTicketSeeScheduleTest.class
 rzd_project/target/test-classes/BuyingTicketForSuburbanTrain_RU.class
 target/
